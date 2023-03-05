@@ -1,8 +1,9 @@
 from pynput.mouse import Button
+from get_key import get_key
 
 def prompts():
-    toggle_key = input("Key to toggle autoclicker: ")
-    exit_key = input("Key to exit program: ")
+    toggle_key = get_key("Key to toggle autoclicker: ")
+    exit_key = get_key("Key to exit program: ")
     delay = float(input("Delay between mouse clicks (in seconds): "))
     button = input("Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): ")
 
