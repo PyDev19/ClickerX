@@ -3,3 +3,4 @@ __pycache__/*
 build/*
 setup.py
 icon.ico
+setup.iss
