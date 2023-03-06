@@ -1,14 +1,14 @@
 from pynput.mouse import Button
 from get_key import get_key
-import sys
+import msvcrt
 
 def get_input(prompt):
-    sys.stdout.write("\033[K")
-    sys.stdout.flush()
+    while msvcrt.kbhit():
+        msvcrt.getch()
     
     user_input = input(prompt)
-    
     return user_input
+
 
 def prompts():
     toggle_key = get_key("Key to toggle autoclicker (press any key): ")
