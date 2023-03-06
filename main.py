@@ -2,7 +2,7 @@ from pynput.mouse import Controller
 from pynput.keyboard import Listener
 from mouse_clicker import AutoClicker
 from sys import exit
-import prompts
+import prompts, time
 
 toggle_key, exit_key, delay, button = prompts.prompts()
 
@@ -34,6 +34,7 @@ def on_press(key):
                 auto_clicker.stop_clicking()
         elif key.name == exit_key:
             print("exiting program")
+            time.sleep(1)
             auto_clicker.exit()
             exit()
 
