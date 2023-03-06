@@ -22,13 +22,14 @@ def get_key(prompt_string):
     global key_input
     global keyboard_listener
     
+    key_input = None
+    
+    print(prompt_string, end="", flush=True)
+    
     if keyboard_listener is None or not keyboard_listener.running:
         keyboard_listener = keyboard.Listener(on_press=on_press, on_release=on_release, daemon=True)
         key_input = None
         keyboard_listener.start()
-    
-    key_input = None
-    print(prompt_string, end="")
     
     while key_input is None:
         pass
