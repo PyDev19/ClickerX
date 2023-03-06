@@ -1,9 +1,10 @@
 venv/*
 __pycache__/*
 build/*
-setup.py
-icon.ico
-setup.iss
 Output/*
 compiled_files/*
+
 compile.py
+setup.py
+setup.iss
+icon.ico
