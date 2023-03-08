@@ -1,42 +1,42 @@
+# Import the necessary modules.
 from pynput import keyboard
+from queue import Queue
 
-def on_press(key):
+# Define the function that will be called when a key is pressed.
+def on_press(key: keyboard.Key) -> None:
     pass
 
-def on_release(key):
-    global key_input
-    
-    if key:
-        try:
-            key_input = key.char
-            keyboard_listener.stop()
-            
-        except AttributeError:
-            key_input = key.name
-            keyboard_listener.stop()
+# Define the function that will be called when a key is released.
+def on_release(key: keyboard.Key, queue: Queue) -> None:
+    try:
+        # Put the character key in the queue.
+        queue.put(key.char)
+    except AttributeError:
+        # Put non-character keys in the queue.
+        queue.put(key.name)
 
-keyboard_listener = None
-key_input = None
-
-def get_key(prompt_string):
-    global key_input
-    global keyboard_listener
+# Define a function to get the key from the user, with a prompt string as a parameter.
+def get_key(prompt_string: str) -> str:
+    # Create a new queue object to hold the key value.
+    key_queue = Queue()
     
-    key_input = None
-    
-    print(prompt_string, end="", flush=True)
-    
-    if keyboard_listener is None or not keyboard_listener.running:
-        keyboard_listener = keyboard.Listener(on_press=on_press, on_release=on_release, daemon=True)
-        key_input = None
-        keyboard_listener.start()
-    
-    while key_input is None:
-        pass
-    
-    keyboard_listener.stop()
-    keyboard_listener.join()
-    
-    print(key_input)
-    
-    return key_input
+    # Start a keyboard listener with the on_press and on_release functions.
+    # Use a lambda function to pass the queue object to the on_release function.
+    with keyboard.Listener(on_press=on_press, on_release=lambda key: on_release(key, queue=key_queue)):
+        # Print the prompt string to the console.
+        # Use flush=True to ensure that the message is printed immediately.
+        # Use end='' to make sure that the next print statement is on the same line.
+        print(prompt_string, end='', flush=True)
+        
+        # Initialize the key value to None.
+        key = None
+        
+        # Keep looping until a key value has been retrieved from the queue.
+        while key is None:
+            key = key_queue.get()
+        
+        # Print the key that the user has pressed.
+        print(key)
+        
+        # Return the key value to the calling function.
+        return key
