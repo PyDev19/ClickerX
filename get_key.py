@@ -1,6 +1,7 @@
 # Import the necessary modules.
 from pynput import keyboard
 from queue import Queue
+from constants import RESET, YELLOW
 
 # Define the function that will be called when a key is pressed.
 def on_press(key: keyboard.Key) -> None:
@@ -55,7 +56,7 @@ def get_key(prompt_string: str) -> str:
             key = key_queue.get()
         
         # Print the key that the user has pressed.
-        print("\033[33m"+key+"\033[0m")
+        print(YELLOW + key + RESET)
         
         # Return the key value to the calling function.
         return key

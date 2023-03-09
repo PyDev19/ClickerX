@@ -5,7 +5,8 @@ from mouse_clicker import AutoClicker
 from sys import exit
 from vtp import enable_vtp, disable_vtp
 from prompts import prompts
-import time
+from constants import RESET, GREEN, CYAN, RED
+import time 
 
 # enable vtp when program starts
 enable_vtp()
@@ -27,16 +28,16 @@ def on_press(key):
         if key.char == toggle_key:
             # if autoclicker is not running, start it and print a message
             if not auto_clicker.running:
-                print("\033[32mautoclicker started\033[0m")
+                print(f"{GREEN}autoclicker started{RESET}")
                 auto_clicker.start_clicking()
             # if autoclicker is running, stop it and print a message
             else:
-                print("\033[36mautoclicker stoped\033[0m")
+                print(f"{CYAN}autoclicker stoped{RESET}")
                 auto_clicker.stop_clicking()
         # check if key pressed is the exit key
         elif key.char == exit_key:
             # disable virtual terminal processing, print a message, wait for a second , and exit the program
-            print("\033[31mexiting the program\033[0m")
+            print(f"{RED}exiting the program{RESET}")
             
             disable_vtp()
             
@@ -50,16 +51,16 @@ def on_press(key):
         if key.name == toggle_key:
             # if autoclicker is not running, start it and print a message
             if not auto_clicker.running:
-                print("\033[32mautoclicker started\033[0m")
+                print(f"{GREEN}autoclicker started{RESET}")
                 auto_clicker.start_clicking()
             # if autoclicker is running, stop it and print a message
             else:
-                print("\033[36mautoclicker stoped\033[0m")
+                print(f"{CYAN}autoclicker stoped{RESET}")
                 auto_clicker.stop_clicking()
         # check if the pressed key is the exit key (non character key)
         elif key.name == exit_key:
             # disable virtual terminal processing, print a message , wait for a second, and exit program
-            print("\033[31mexiting the program\033[0m")
+            print(f"{RED}exiting the program{RESET}")
             
             disable_vtp()
             
