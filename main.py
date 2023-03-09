@@ -3,10 +3,15 @@ from pynput.mouse import Controller
 from pynput.keyboard import Listener
 from mouse_clicker import AutoClicker
 from sys import exit
-import prompts, time
+from vtp import enable_vtp, disable_vtp
+from prompts import prompts
+import time
+
+# enable vtp when program starts
+enable_vtp()
 
 # get user input through command line prompts
-toggle_key, exit_key, delay, button = prompts.prompts()
+toggle_key, exit_key, delay, button = prompts()
 
 # initialize mouse and AutoClicker object
 mouse = Controller()
@@ -22,16 +27,21 @@ def on_press(key):
         if key.char == toggle_key:
             # if autoclicker is not running, start it and print a message
             if not auto_clicker.running:
-                print("autoclicker started")
+                print("\033[32mautoclicker started\033[0m")
                 auto_clicker.start_clicking()
             # if autoclicker is running, stop it and print a message
             else:
-                print("autoclicker stoped")
+                print("\033[36mautoclicker stoped\033[0m")
                 auto_clicker.stop_clicking()
         # check if key pressed is the exit key
         elif key.char == exit_key:
-            # print a message, wait for a second exit the program
-            print("exiting program")
+            # disable virtual terminal processing, print a message, wait for a second , and exit the program
+            print("\033[31mexiting the program\033[0m")
+            
+            disable_vtp()
+            
+            time.sleep(1)
+            
             auto_clicker.exit()
             exit()
     
@@ -40,17 +50,21 @@ def on_press(key):
         if key.name == toggle_key:
             # if autoclicker is not running, start it and print a message
             if not auto_clicker.running:
-                print("autoclicker started")
+                print("\033[32mautoclicker started\033[0m")
                 auto_clicker.start_clicking()
             # if autoclicker is running, stop it and print a message
             else:
-                print("autoclicker stoped")
+                print("\033[36mautoclicker stoped\033[0m")
                 auto_clicker.stop_clicking()
         # check if the pressed key is the exit key (non character key)
         elif key.name == exit_key:
-            # print a message , wait for a second, and exit program
-            print("exiting program")
+            # disable virtual terminal processing, print a message , wait for a second, and exit program
+            print("\033[31mexiting the program\033[0m")
+            
+            disable_vtp()
+            
             time.sleep(1)
+            
             auto_clicker.exit()
             exit()
 
