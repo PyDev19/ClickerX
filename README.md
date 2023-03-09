@@ -7,7 +7,7 @@ A simple terminal based autoclicker
 
 ## Features of AutoClicker:
 - Basically ever feature that an autoclicker already has.
-- Terminal based meaning the autoclicker runs in a terminal window if you run the exe, this makes program size very small (right about 10 mb).
+- Terminal based meaning the autoclicker runs in a terminal window if you run the exe, this makes program size very small (about 10 mb).
 
 ## Future plans:
 - Add colors to print statements to make the app look better
