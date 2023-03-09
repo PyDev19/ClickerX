@@ -1,11 +1,11 @@
 # import necessary modules
 from pynput.mouse import Controller
 from pynput.keyboard import Listener
-from mouse_clicker import AutoClicker
+from src.mouse_clicker import AutoClicker
 from sys import exit
-from vtp import enable_vtp, disable_vtp
-from prompts import prompts
-from constants import RESET, GREEN, CYAN, RED
+from src.vtp import enable_vtp, disable_vtp
+from src.prompts import prompts
+from src.constants import RESET, GREEN, CYAN, RED
 import time 
 
 # enable vtp when program starts
