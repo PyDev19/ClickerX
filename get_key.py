@@ -17,6 +17,25 @@ def on_release(key: keyboard.Key, queue: Queue) -> None:
 
 # Define a function to get the key from the user, with a prompt string as a parameter.
 def get_key(prompt_string: str) -> str:
+    '''
+    Prompts the user for a key.
+    
+    Args:
+        prompt_string (str): A string representing the prompt to display to the user
+        
+    Returns:
+        key (str): A key which the user pressed
+    
+    Raises:
+        ValueError: If the user presses an invalid key.
+
+    Examples:
+        To prompt the user for a key and print the key that was pressed, use:
+
+        >>> key = get_key("Press a key: ")
+        >>> print("You pressed:", key)
+    '''
+    
     # Create a new queue object to hold the key value.
     key_queue = Queue()
     
@@ -36,7 +55,7 @@ def get_key(prompt_string: str) -> str:
             key = key_queue.get()
         
         # Print the key that the user has pressed.
-        print(key)
+        print("\033[33m"+key+"\033[0m")
         
         # Return the key value to the calling function.
         return key
