@@ -24,3 +24,8 @@ A simple terminal based autoclicker
 - You don't need need to unistall previous version of this app to install a new version.
 - If you run the installer with an older version installed it will automatically update it to a new verion.
 - Thank Inno Setup!
+
+## Customization:
+- If you want you can download the source code and download the required libraries from `requirements.txt`
+- Then you can customize the way it works or the colors of print statements using the new `constants.py` which contains constant values for every text decoration ANSI escape codes that can be used in print statements.
+- If you want to distribute your own customized version of this app make sure to read the `LICENSE.md` to know what to do and not do, and crediting would also be nice.
