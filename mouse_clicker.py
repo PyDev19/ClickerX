@@ -5,8 +5,19 @@ import threading
 
 # Define AutoClicker class and make is inherit Thread class.
 class AutoClicker(threading.Thread):
+    '''
+    A class for creating an autoclicker that inherits from the Thread class.
+    '''
     # Initialize class variables.
     def __init__(self, mouse: Controller, delay: float, button: Button):
+        '''
+        Initialize a new AutoClicker object.
+        
+        Args:
+            mouse (Controller): The mouse controller object used to simulate mouse clicks.
+            delay (float): The delay between each mouse click in seconds.
+            button (Button): The button to be autoclicked (Left, Right, Middle).
+        '''
         super(AutoClicker, self).__init__()
         self.mouse = mouse
         self.delay = delay
