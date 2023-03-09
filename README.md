@@ -2,8 +2,8 @@
 A simple terminal based autoclicker
 
 ## Latest Changes:
-- Added comments in each file to explain what each line of code is supposed to do.
-- Made ```get_key()``` function more efficient by using queue.
+- Added doc string for some functions and classes to communicate the necessary information about the function to users who may need to use or modify it.
+- Added colors using ANSI escape codes and enabling virtual terminal processing (vtp).
 
 ## Features of AutoClicker:
 - Basically ever feature that an autoclicker already has.
