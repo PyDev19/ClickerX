@@ -1,4 +1,4 @@
-# AutoClicker
+# PyClickerX
 A simple terminal based autoclicker
 
 ## Latest Changes:
