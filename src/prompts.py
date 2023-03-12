@@ -3,7 +3,7 @@ from typing import Tuple
 from pynput.mouse import Button
 from src.get_key import get_key
 import msvcrt
-from src.constants import RESET, BLUE, YELLOW, CYAN
+from src.constants import RESET, BLUE, YELLOW, CYAN, RED
 
 # Defines function to get user input with a prompt string and returns user input string.
 def get_input(prompt: str) -> str:
@@ -29,7 +29,7 @@ def get_input(prompt: str) -> str:
 
 
 # Function to get user input for toggle key, exit key, delay, and button to be autoclicked.
-def prompts() -> Tuple[str, str, float, Button]:
+def prompts() -> Tuple[str, str, str, float, Button]:
     '''
     Prompts the user to input toggle_key, exit_key, delay, and button to be autoclicked.
     Returns a tuple containing toggle_key, exit_key, delay, and button values entered by the user.
@@ -38,41 +38,56 @@ def prompts() -> Tuple[str, str, float, Button]:
         None
         
     Returns:
-        A tuple containing toggle_key (str), exit_key (str), delay (float), and button (Button enum value).
+        A tuple containing mode (str, toggle_key (str), exit_key (str), delay (float), and button (Button enum value).
     '''
     
+    mode = get_key(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
+    
+    if mode == "k" or mode == "m":
+        if mode == "k":
+            print(f"{BLUE}AutoClicker Mode: Keyboard\n{RESET}")
+        elif mode == "m":
+            print(f"{BLUE}AutoClicker Mode: Keyboard\n{RESET}")
+    else:
+        print(f"{RED}Please enter either m or n{RESET}")
+        mode = get_key(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
+    
     # Get toggle key from user by calling get_key function with a prompt message.
-    # \033[34m is for giving blue color to print message and \033[0m is to reset the color back to normal
     toggle_key = get_key(f"{BLUE}Key to toggle autoclicker (press any key): {RESET}")
     
     # Get exit key from user by calling get_key function with a prompt message.
-    # \033[34m is for giving blue color to print message and \033[0m is to reset the color back to normal
     exit_key = get_key(f"{BLUE}Key to exit program (press any key): {RESET}")
     
-    # Get delay between mouse clicks in seconds from user by calling get_input function with a prompt message.
-    # \033[34m is for giving blue color to print message and \033[33m is for giving yellow color to the user input
-    delay = float(get_input(f"\033[34mDelay between mouse clicks (in seconds): {YELLOW}"))
-    print(f"{RESET}", end="") # \033[0m to reset the color back to normal
-    
-    # Get button to be autoclicked from user by calling input function with a prompt message.
-    # \033[34m is for giving blue color to print message and \033[33m is for giving yellow color to the user input
-    button = input(f"\033[34mButton to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {YELLOW}")
-    print(f"{RESET}", end="") # \033[0m to reset the color back to normal
+    if mode == "k":
+        # Get key to be autoclicked from user by calling get_key function with a prompt message.
+        button = get_key(f"{BLUE}Key to be autoclicked (press any key): {RESET}")
+        
+        # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
+        delay = float(get_input(f"{BLUE}Delay between key presses (in seconds): {YELLOW}"))
+        print(f"{RESET}", end="")
+        
+    elif mode == "m":
+        # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
+        delay = float(get_input(f"{BLUE}Delay between mouse clicks (in seconds): {YELLOW}"))
+        print(f"{RESET}", end="")
+        
+        # Get key to be autoclicked from user by calling get_key function with a prompt message.
+        button = input(f"{BLUE}Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {YELLOW}")
+        print(f"{RESET}", end="")
 
-    # Check the button value entered by the user and assign corresponding Button enum value.
-    if button.lower() == "left mouse":
-        button = Button.left
-    elif button.lower() == "right mouse":
-        button = Button.right
-    elif button.lower() == "middle mouse":
-        button = Button.middle
+        # Check the button value entered by the user and assign corresponding Button enum value.
+        if button.lower() == "left mouse":
+            button = Button.left
+        elif button.lower() == "right mouse":
+            button = Button.right
+        elif button.lower() == "middle mouse":
+            button = Button.middle
         
     # Print information about toggle key and exit key to the console.
-    # \033[36m is to add cyan color to the print meesage and \033[0m is to reset the color back to norma
     print("\n")
     print(f"{CYAN}Toggle autoclicker by pressing {toggle_key} key{RESET}")
-    print(f"{CYAN}Exit program by pressing {exit_key} key\033[0m")
+    print(f"{CYAN}Exit program by pressing {exit_key} key{RESET}")
     print("\n")
 
     # Return the toggle key, exit key, delay, and button values to the calling function.
-    return toggle_key, exit_key, delay, button
+    return mode, toggle_key, exit_key, delay, button
