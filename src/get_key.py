@@ -1,7 +1,7 @@
 # Import the necessary modules.
 from pynput import keyboard
 from queue import Queue
-from src.constants import RESET, YELLOW
+from src.colors.constants import RESET, YELLOW
 
 # Define the function that will be called when a key is pressed.
 def on_press(key: keyboard.Key) -> None:

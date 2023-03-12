@@ -1,9 +1,10 @@
 # Import the necessary modules.
 from typing import Tuple
 from pynput.mouse import Button
-from src.get_key import get_key
 import msvcrt
-from src.constants import RESET, BLUE, YELLOW, CYAN, RED
+
+from src.get_key import get_key
+from src.colors.constants import RESET, BLUE, YELLOW, CYAN, RED
 
 # Defines function to get user input with a prompt string and returns user input string.
 def get_input(prompt: str) -> str:

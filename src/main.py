@@ -8,9 +8,11 @@ import time
 from src.clickers.mouse_clicker import AutoClicker
 from src.clickers.keyboard_clicker import KeyboardClicker
 
-# other custom modules
-from src.vtp import enable_vtp, disable_vtp
-from src.constants import RESET, GREEN, CYAN, RED
+# import colors modules
+from src.colors.vtp import enable_vtp, disable_vtp
+from src.colors.constants import RESET, GREEN, CYAN, RED
+
+# import prompts modules
 from src.prompts import prompts
 
 # enable vtp when program starts
