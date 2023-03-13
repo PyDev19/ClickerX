@@ -6,7 +6,7 @@ A simple terminal based autoclicker
 - Added a prompt that asks if you want to use keyboard clicker or mouse autoclicker
 - Added different folders for clickers (keyboard and mouse clicker) and colors (vtp and constants)
 
-## Features of AutoClicker:
+## Features of PyClickerX:
 - Basically ever feature that an autoclicker already has.
 - Terminal based meaning the autoclicker runs in a terminal window if you run the exe, this makes program size very small (about 10 mb).
 - Has a keyboard clicker, that can press a set key with a set delay
