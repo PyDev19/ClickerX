@@ -1,6 +1,8 @@
 # Import the necessary modules.
 from pynput import keyboard
 from queue import Queue
+
+# Import color module
 from src.colors.constants import RESET, YELLOW
 
 # Define the function that will be called when a key is pressed.
@@ -12,6 +14,7 @@ def on_release(key: keyboard.Key, queue: Queue) -> None:
     try:
         # Put the character key in the queue.
         queue.put(key.char)
+    
     except AttributeError:
         # Put non-character keys in the queue.
         queue.put(key.name)

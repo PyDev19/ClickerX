@@ -8,6 +8,7 @@ class KeyboardClicker(threading.Thread):
     '''
     A class for creating an KeyboardClicker that inherits from the Thread class.
     '''
+
     # Initialize class variables.
     def __init__(self, keyboard: Controller, delay: float, key: Key):
         '''
@@ -18,6 +19,7 @@ class KeyboardClicker(threading.Thread):
             delay (float): The delay between each mouse click in seconds.
             button (key): The button to be autoclicked (Left, Right, Middle).
         '''
+
         super(KeyboardClicker, self).__init__()
         self.keyboard = keyboard
         self.delay = delay
@@ -44,5 +46,7 @@ class KeyboardClicker(threading.Thread):
             while self.running: # Check if autoclicker is running.
                 self.keyboard.press(self.key) # Presses the key that is set for autoclicking.
                 self.keyboard.release(self.key) # Releases the key that is set for autoclicking.
+                
                 time.sleep(self.delay) # Delays the autoclicker by the set ammount.
+            
             time.sleep(0.1) # Delays main loop so the program doesn't crash.

@@ -43,6 +43,8 @@ class AutoClicker(threading.Thread):
         while self.program_running: # Check if program is running.
             while self.running: # Check if autoclicker is running.
                 self.mouse.click(self.button) # Click the mouse button that is set for autoclicking.
+                
                 time.sleep(self.delay) # Delays the autoclicker by the set ammount.
+            
             time.sleep(0.1) # Delays main loop so the program doesn't crash.
 

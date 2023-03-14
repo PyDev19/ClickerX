@@ -3,6 +3,7 @@ from typing import Tuple
 from pynput.mouse import Button
 import msvcrt
 
+# Import colors modules
 from src.get_key import get_key
 from src.colors.constants import RESET, BLUE, YELLOW, CYAN, RED
 
@@ -17,6 +18,7 @@ def get_input(prompt: str) -> str:
     Returns:
         A string representing the user's input.
     """
+    
     # Loop to check if a key press is waiting to be processed.
     while msvcrt.kbhit():
         # Function to block a pending key press.
@@ -47,8 +49,10 @@ def prompts() -> Tuple[str, str, str, float, Button]:
     if mode == "k" or mode == "m":
         if mode == "k":
             print(f"{BLUE}AutoClicker Mode: Keyboard\n{RESET}")
+        
         elif mode == "m":
             print(f"{BLUE}AutoClicker Mode: Keyboard\n{RESET}")
+    
     else:
         print(f"{RED}Please enter either m or n{RESET}")
         mode = get_key(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
@@ -79,15 +83,19 @@ def prompts() -> Tuple[str, str, str, float, Button]:
         # Check the button value entered by the user and assign corresponding Button enum value.
         if button.lower() == "left mouse":
             button = Button.left
+        
         elif button.lower() == "right mouse":
             button = Button.right
+        
         elif button.lower() == "middle mouse":
             button = Button.middle
         
     # Print information about toggle key and exit key to the console.
     print("\n")
+    
     print(f"{CYAN}Toggle autoclicker by pressing {toggle_key} key{RESET}")
     print(f"{CYAN}Exit program by pressing {exit_key} key{RESET}")
+    
     print("\n")
 
     # Return the toggle key, exit key, delay, and button values to the calling function.
