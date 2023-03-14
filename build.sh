@@ -1,6 +1,12 @@
 #!/bin/bash
 
 # Define variables
+VENV_DIR=env
+
+# Activate virtual environment
+source "./$VENV_DIR/Scripts/activate"
+
+# Define variables
 BUILD_DIR=build/app
 
 # Define functions
@@ -50,3 +56,5 @@ delete_unecessary_dll $BUILD_DIR
 # Finish app building process
 echo -e "\033[32mDone app building process, final build is located in '$BUILD_DIR' directory\033[0m"
 echo -e "\n"
+
+sleep 2
