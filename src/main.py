@@ -15,6 +15,9 @@ from src.colors.constants import RESET, GREEN, CYAN, RED
 # import prompts modules
 from src.prompts import prompts
 
+# import settings module
+from src.settings import save_settings
+
 # enable vtp when program starts
 enable_vtp()
 
@@ -56,6 +59,10 @@ if mode == 'm':
                 
                 auto_clicker.exit()
                 exit()
+            
+            elif key.char == '`':
+                print(f"{GREEN}saving current settings...{RESET}")
+                save_settings(mode, toggle_key, exit_key, delay, button)
         
         except AttributeError:
             # check if the pressed key is the toggle key (non character key)
