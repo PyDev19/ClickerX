@@ -77,7 +77,7 @@ def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, butto
     with open('settings.cfg', 'w') as config_file:
         config.write(config_file)
     
-    print(f"{BLUE}done saving settings, you can continue using autoclicker now{RESET}")    
+    print(f"{GREEN}done saving settings, you can continue using autoclicker now{RESET}")    
 
 def read_settings(mode):
     config = ConfigParser()
@@ -86,11 +86,11 @@ def read_settings(mode):
     if mode == "m":
         section = "MOUSE"
     elif mode == "k":
-        section == "KEYBOARD"
+        section = "KEYBOARD"
     
     toggle_key = config[section]['toggle_key']
     exit_key = config[section]['exit_key']
-    delay = config[section]['delay']
+    delay = float(config[section]['delay'])
     button = config[section]['button']
     
     return toggle_key, exit_key, delay, button

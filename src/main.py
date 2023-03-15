@@ -61,9 +61,9 @@ if mode == 'm':
                 exit()
             
             elif key.char == '`':
-                print(f"{GREEN}saving current settings...{RESET}")
+                print(f"{CYAN}saving current settings...{RESET}")
                 save_settings(mode, toggle_key, exit_key, delay, button)
-        
+
         except AttributeError:
             # check if the pressed key is the toggle key (non character key)
             if key.name == toggle_key:
@@ -129,6 +129,10 @@ if mode == 'k':
                 
                 keyboard_clicker.exit()
                 exit()
+            
+            elif key.char == '`':
+                print(f"{CYAN}saving current settings...{RESET}")
+                save_settings(mode, toggle_key, exit_key, delay, button)
         
         except AttributeError:
             # check if the pressed key is the toggle key (non character key)

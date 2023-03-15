@@ -10,6 +10,8 @@ from src.keys.get_mode import get_mode
 from src.settings import config_prompt, read_settings
 from src.colors.constants import RESET, BLUE, YELLOW, CYAN
 
+loaded_setting = None
+
 # Defines function to get user input with a prompt string and returns user input string.
 def get_input(prompt: str) -> str:
     """
@@ -33,7 +35,6 @@ def get_input(prompt: str) -> str:
     # Return the user input value to the calling function.
     return user_input
 
-
 # Function to get user input for toggle key, exit key, delay, and button to be autoclicked.
 def prompts() -> Tuple[str, str, str, float, Button]:
     '''
@@ -47,6 +48,8 @@ def prompts() -> Tuple[str, str, str, float, Button]:
         A tuple containing mode (str, toggle_key (str), exit_key (str), delay (float), and button (Button enum value).
     '''
     
+    global loaded_setting
+    
     config = ConfigParser()
     
     # Gets mode of autoclicker by prompting the user
@@ -57,16 +60,20 @@ def prompts() -> Tuple[str, str, str, float, Button]:
             config.read("settings.cfg")
             if config.has_section('KEYBOARD'):
                 toggle_key, exit_key, delay, button = config_prompt(f'{BLUE}Would you like to load from settings (y/n): {RESET}', mode)
+                loaded_setting = True
             else:
+                loaded_setting = False
                 pass
     if mode == "m":
         if os.path.exists('settings.cfg'):
             config.read("settings.cfg")
             if config.has_section('MOUSE'):
                 toggle_key, exit_key, delay, button = config_prompt(f'{BLUE}Would you like to load from settings (y/n): {RESET}', mode)
+                loaded_setting = True
             else:
+                loaded_setting = False
                 pass
-    else:
+    if loaded_setting == False:
         # Get toggle key from user by calling get_key function with a prompt message.
         toggle_key = get_key(f"{BLUE}Key to toggle autoclicker (press any key): {RESET}")
         
