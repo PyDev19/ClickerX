@@ -51,11 +51,11 @@ def get_mode(prompt_string: str) -> str:
         
         # Checks if key pressed is "k"
         if key == "k":
-            print(f"{YELLOW}AutoClicker Mode: Keyboard Clicker{RESET}")
+            print(f"{YELLOW}AutoClicker Mode: Keyboard Clicker\n{RESET}")
             
         # Checks if key pressed is "m"
         elif key == "m":
-            print(f"{YELLOW}AutoClicker Mode: Mouse Clicker{RESET}")
+            print(f"{YELLOW}AutoClicker Mode: Mouse Clicker\n{RESET}")
         
         # Checks if key pressed is neither "m" or "k"
         elif key != "m" or key != "k":
