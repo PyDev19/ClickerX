@@ -53,7 +53,7 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
             print(f"{YELLOW}{key}{RESET}")
             print(f"{CYAN}Loading Conifg...{RESET}")
             toggle_key, exit_key, delay, button = read_settings(mode)
-            load_settings = False
+            load_settings = True
             print(f"{GREEN}Done loading from config!{RESET}")
             
         # Checks if key pressed is "m"
