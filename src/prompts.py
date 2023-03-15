@@ -5,7 +5,8 @@ import msvcrt
 
 # Import colors modules
 from src.get_key import get_key
-from src.colors.constants import RESET, BLUE, YELLOW, CYAN, RED
+from src.get_mode import get_mode
+from src.colors.constants import RESET, BLUE, YELLOW, CYAN
 
 # Defines function to get user input with a prompt string and returns user input string.
 def get_input(prompt: str) -> str:
@@ -44,18 +45,8 @@ def prompts() -> Tuple[str, str, str, float, Button]:
         A tuple containing mode (str, toggle_key (str), exit_key (str), delay (float), and button (Button enum value).
     '''
     
-    mode = get_key(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
-    
-    if mode == "k" or mode == "m":
-        if mode == "k":
-            print(f"{BLUE}AutoClicker Mode: Keyboard\n{RESET}")
-        
-        elif mode == "m":
-            print(f"{BLUE}AutoClicker Mode: Keyboard\n{RESET}")
-    
-    else:
-        print(f"{RED}Please enter either m or n{RESET}")
-        mode = get_key(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
+    # Gets mode of autoclicker by prompting the user
+    mode = get_mode(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
     
     # Get toggle key from user by calling get_key function with a prompt message.
     toggle_key = get_key(f"{BLUE}Key to toggle autoclicker (press any key): {RESET}")
