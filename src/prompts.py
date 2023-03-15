@@ -1,11 +1,12 @@
 # Import the necessary modules.
 from typing import Tuple
 from pynput.mouse import Button
-import msvcrt
+import msvcrt, os
 
 # Import colors modules
 from src.keys.get_key import get_key
 from src.keys.get_mode import get_mode
+from src.settings import config_prompt
 from src.colors.constants import RESET, BLUE, YELLOW, CYAN
 
 # Defines function to get user input with a prompt string and returns user input string.
@@ -44,6 +45,11 @@ def prompts() -> Tuple[str, str, str, float, Button]:
     Returns:
         A tuple containing mode (str, toggle_key (str), exit_key (str), delay (float), and button (Button enum value).
     '''
+    
+    if os.path.exists('settings.cfg'):
+        config_prompt('Would you like to load from settings (y/n): ')
+    else:
+        pass
     
     # Gets mode of autoclicker by prompting the user
     mode = get_mode(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
