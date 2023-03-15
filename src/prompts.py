@@ -7,7 +7,7 @@ import msvcrt, os
 # Import colors modules
 from src.keys.get_key import get_key
 from src.keys.get_mode import get_mode
-from src.settings import config_prompt
+from src.settings import config_prompt, read_settings
 from src.colors.constants import RESET, BLUE, YELLOW, CYAN
 
 # Defines function to get user input with a prompt string and returns user input string.
@@ -52,54 +52,53 @@ def prompts() -> Tuple[str, str, str, float, Button]:
     # Gets mode of autoclicker by prompting the user
     mode = get_mode(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
     
-    # Get toggle key from user by calling get_key function with a prompt message.
-    toggle_key = get_key(f"{BLUE}Key to toggle autoclicker (press any key): {RESET}")
-    
-    # Get exit key from user by calling get_key function with a prompt message.
-    exit_key = get_key(f"{BLUE}Key to exit program (press any key): {RESET}")
-    
     if mode == "k":
         if os.path.exists('settings.cfg'):
+            config.read("settings.cfg")
             if config.has_section('KEYBOARD'):
-                config_prompt('Would you like to load from settings (y/n): ', mode)
+                toggle_key, exit_key, delay, button = config_prompt(f'{BLUE}Would you like to load from settings (y/n): {RESET}', mode)
             else:
                 pass
-        else:
-            pass
-        
-        # Get key to be autoclicked from user by calling get_key function with a prompt message.
-        button = get_key(f"{BLUE}Key to be autoclicked (press any key): {RESET}")
-        
-        # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
-        delay = float(get_input(f"{BLUE}Delay between key presses (in seconds): {YELLOW}"))
-        print(f"{RESET}", end="")
-        
-    elif mode == "m":
+    if mode == "m":
         if os.path.exists('settings.cfg'):
+            config.read("settings.cfg")
             if config.has_section('MOUSE'):
-                config_prompt('Would you like to load from settings (y/n): ', mode)
+                toggle_key, exit_key, delay, button = config_prompt(f'{BLUE}Would you like to load from settings (y/n): {RESET}', mode)
             else:
                 pass
-        else:
-            pass
+    else:
+        # Get toggle key from user by calling get_key function with a prompt message.
+        toggle_key = get_key(f"{BLUE}Key to toggle autoclicker (press any key): {RESET}")
         
-        # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
-        delay = float(get_input(f"{BLUE}Delay between mouse clicks (in seconds): {YELLOW}"))
-        print(f"{RESET}", end="")
+        # Get exit key from user by calling get_key function with a prompt message.
+        exit_key = get_key(f"{BLUE}Key to exit program (press any key): {RESET}")
         
-        # Get key to be autoclicked from user by calling get_key function with a prompt message.
-        button = input(f"{BLUE}Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {YELLOW}")
-        print(f"{RESET}", end="")
+        if mode == "k":
+            # Get key to be autoclicked from user by calling get_key function with a prompt message.
+            button = get_key(f"{BLUE}Key to be autoclicked (press any key): {RESET}")
+            
+            # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
+            delay = float(get_input(f"{BLUE}Delay between key presses (in seconds): {YELLOW}"))
+            print(f"{RESET}", end="")
+            
+        if mode == "m":
+            # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
+            delay = float(get_input(f"{BLUE}Delay between mouse clicks (in seconds): {YELLOW}"))
+            print(f"{RESET}", end="")
+            
+            # Get key to be autoclicked from user by calling get_key function with a prompt message.
+            button = input(f"{BLUE}Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {YELLOW}")
+            print(f"{RESET}", end="")
 
-        # Check the button value entered by the user and assign corresponding Button enum value.
-        if button.lower() == "left mouse":
-            button = Button.left
-        
-        elif button.lower() == "right mouse":
-            button = Button.right
-        
-        elif button.lower() == "middle mouse":
-            button = Button.middle
+            # Check the button value entered by the user and assign corresponding Button enum value.
+            if button.lower() == "left mouse":
+                button = Button.left
+            
+            elif button.lower() == "right mouse":
+                button = Button.right
+            
+            elif button.lower() == "middle mouse":
+                button = Button.middle
         
     # Print information about toggle key and exit key to the console.
     print("\n")
