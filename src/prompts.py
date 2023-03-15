@@ -4,8 +4,8 @@ from pynput.mouse import Button
 import msvcrt
 
 # Import colors modules
-from src.get_key import get_key
-from src.get_mode import get_mode
+from src.keys.get_key import get_key
+from src.keys.get_mode import get_mode
 from src.colors.constants import RESET, BLUE, YELLOW, CYAN
 
 # Defines function to get user input with a prompt string and returns user input string.
