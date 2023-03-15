@@ -74,7 +74,7 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
         return toggle_key, exit_key, delay, button, load_settings
 
 def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, button: str):
-    config = ConfigParser()
+    config = ConfigParser(strict=False)
     
     if mode == "k":
         config['KEYBOARD'] = {'toggle_key': toggle_key, 'exit_key': exit_key, 'delay': delay, 'button': button}
