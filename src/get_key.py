@@ -29,9 +29,6 @@ def get_key(prompt_string: str) -> str:
         
     Returns:
         key (str): A key which the user pressed
-    
-    Raises:
-        ValueError: If the user presses an invalid key.
 
     Examples:
         To prompt the user for a key and print the key that was pressed, use:
