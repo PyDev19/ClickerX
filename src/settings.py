@@ -1,6 +1,7 @@
 # Import the necessary modules.
 from pynput import keyboard
 from queue import Queue
+from configparser import ConfigParser
 
 # Import color module
 from src.colors.constants import RESET, YELLOW, RED, BLUE
@@ -20,7 +21,7 @@ def on_release(key: keyboard.Key, queue: Queue) -> None:
         queue.put(key.name)
 
 # Define a function to get the key from the user, with a prompt string as a parameter.
-def config_prompt(prompt_string: str) -> str:
+def config_prompt(prompt_string: str, mode: str):
     '''
     Prompts the user for a key to load config.
     
@@ -58,3 +59,16 @@ def config_prompt(prompt_string: str) -> str:
         elif key != "m" or key != "k":
             print(f"{RED}Please enter either 'y' or 'n'{RESET}")
             config_prompt('Would you like to load from settings (y/n): ')
+
+def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, button: str):
+    config = ConfigParser()
+    
+    if mode == "k":
+        config['KEYBOARD'] = {'toggle_key': toggle_key, 'exit_key': exit_key, 'delay': delay, 'button': button}
+    elif mode == "m":
+        config['MOUSE'] = {'toggle_key': toggle_key, 'exit_key': exit_key, 'delay': delay, 'button': button}
+    
+    with open('settings.cfg', 'w') as config_file:
+        config.write(config_file)
+    
+    print(f"{BLUE}done saving settings, you can continue using autoclicker now{RESET}")    
