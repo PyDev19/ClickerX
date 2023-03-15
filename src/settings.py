@@ -22,7 +22,7 @@ def on_release(key: keyboard.Key, queue: Queue) -> None:
         queue.put(key.name)
 
 # Define a function to get the key from the user, with a prompt string as a parameter.
-def config_prompt(prompt_string: str, mode: str):
+def config_prompt(prompt_string: str, mode: str, load_settings: bool):
     '''
     Prompts the user for a key to load config.
     
@@ -57,14 +57,20 @@ def config_prompt(prompt_string: str, mode: str):
             
         # Checks if key pressed is "m"
         elif key == "n":
+            print(f"{YELLOW}{key}{RESET}")
             print(f"{YELLOW}Continuing to prompts...{RESET}")
+            load_settings = False
+            toggle_key = None
+            exit_key = None
+            delay = None
+            button = None
         
         # Checks if key pressed is neither "m" or "k"
         elif key != "y" or key != "n":
             print(f"{RED}Please enter either 'y' or 'n'{RESET}")
             config_prompt('Would you like to load from settings (y/n): ', mode)
         
-        return toggle_key, exit_key, delay, button
+        return toggle_key, exit_key, delay, button, load_settings
 
 def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, button: str):
     config = ConfigParser()
@@ -74,7 +80,7 @@ def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, butto
     elif mode == "m":
         config['MOUSE'] = {'toggle_key': toggle_key, 'exit_key': exit_key, 'delay': delay, 'button': button}
     
-    with open('settings.cfg', 'w') as config_file:
+    with open('settings.cfg', 'a+') as config_file:
         config.write(config_file)
     
     print(f"{GREEN}done saving settings, you can continue using autoclicker now{RESET}")    
