@@ -29,12 +29,6 @@ def get_mode(prompt_string: str) -> str:
         
     Returns:
         key (str): A key which the user pressed
-
-    Examples:
-        To prompt the user for a key and print the key that was pressed, use:
-
-        >>> key = get_key("Press a key: ")
-        >>> print("You pressed:", key)
     '''
     
     # Create a new queue object to hold the key value.
