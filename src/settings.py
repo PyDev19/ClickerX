@@ -1,10 +1,11 @@
 # Import the necessary modules.
+import os
 from pynput import keyboard
 from queue import Queue
 from configparser import ConfigParser
 
 # Import color module
-from src.colors.constants import RESET, YELLOW, RED, BLUE
+from src.colors.constants import CYAN, GREEN, RESET, YELLOW, RED, BLUE
 
 # Define the function that will be called when a key is pressed.
 def on_press(key: keyboard.Key) -> None:
@@ -49,16 +50,21 @@ def config_prompt(prompt_string: str, mode: str):
         
         # Checks if key pressed is "k"
         if key == "y":
-            print(f"{YELLOW}Loading Conifg...{RESET}")
+            print(f"{YELLOW}{key}{RESET}")
+            print(f"{CYAN}Loading Conifg...{RESET}")
+            toggle_key, exit_key, delay, button = read_settings(mode)
+            print(f"{GREEN}Done loading from config!{RESET}")
             
         # Checks if key pressed is "m"
         elif key == "n":
             print(f"{YELLOW}Continuing to prompts...{RESET}")
         
         # Checks if key pressed is neither "m" or "k"
-        elif key != "m" or key != "k":
+        elif key != "y" or key != "n":
             print(f"{RED}Please enter either 'y' or 'n'{RESET}")
-            config_prompt('Would you like to load from settings (y/n): ')
+            config_prompt('Would you like to load from settings (y/n): ', mode)
+        
+        return toggle_key, exit_key, delay, button
 
 def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, button: str):
     config = ConfigParser()
@@ -72,3 +78,19 @@ def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, butto
         config.write(config_file)
     
     print(f"{BLUE}done saving settings, you can continue using autoclicker now{RESET}")    
+
+def read_settings(mode):
+    config = ConfigParser()
+    config.read('settings.cfg')
+    
+    if mode == "m":
+        section = "MOUSE"
+    elif mode == "k":
+        section == "KEYBOARD"
+    
+    toggle_key = config[section]['toggle_key']
+    exit_key = config[section]['exit_key']
+    delay = config[section]['delay']
+    button = config[section]['button']
+    
+    return toggle_key, exit_key, delay, button
