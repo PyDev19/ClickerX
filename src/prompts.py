@@ -1,6 +1,7 @@
 # Import the necessary modules.
 from typing import Tuple
 from pynput.mouse import Button
+from configparser import ConfigParser
 import msvcrt, os
 
 # Import colors modules
@@ -46,10 +47,7 @@ def prompts() -> Tuple[str, str, str, float, Button]:
         A tuple containing mode (str, toggle_key (str), exit_key (str), delay (float), and button (Button enum value).
     '''
     
-    if os.path.exists('settings.cfg'):
-        config_prompt('Would you like to load from settings (y/n): ')
-    else:
-        pass
+    config = ConfigParser()
     
     # Gets mode of autoclicker by prompting the user
     mode = get_mode(f"{BLUE}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
@@ -61,6 +59,14 @@ def prompts() -> Tuple[str, str, str, float, Button]:
     exit_key = get_key(f"{BLUE}Key to exit program (press any key): {RESET}")
     
     if mode == "k":
+        if os.path.exists('settings.cfg'):
+            if config.has_section('KEYBOARD'):
+                config_prompt('Would you like to load from settings (y/n): ', mode)
+            else:
+                pass
+        else:
+            pass
+        
         # Get key to be autoclicked from user by calling get_key function with a prompt message.
         button = get_key(f"{BLUE}Key to be autoclicked (press any key): {RESET}")
         
@@ -69,6 +75,14 @@ def prompts() -> Tuple[str, str, str, float, Button]:
         print(f"{RESET}", end="")
         
     elif mode == "m":
+        if os.path.exists('settings.cfg'):
+            if config.has_section('MOUSE'):
+                config_prompt('Would you like to load from settings (y/n): ', mode)
+            else:
+                pass
+        else:
+            pass
+        
         # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
         delay = float(get_input(f"{BLUE}Delay between mouse clicks (in seconds): {YELLOW}"))
         print(f"{RESET}", end="")
@@ -92,6 +106,7 @@ def prompts() -> Tuple[str, str, str, float, Button]:
     
     print(f"{CYAN}Toggle autoclicker by pressing {toggle_key} key{RESET}")
     print(f"{CYAN}Exit program by pressing {exit_key} key{RESET}")
+    print(f"{CYAN}Save your settings by pressing ` key{RESET}")
     
     print("\n")
 
