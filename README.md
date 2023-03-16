@@ -50,8 +50,3 @@ This project is licensed under the GNU General Public License version 3 (GNU GPL
 5. Distribution limitations: The GNU GPLv3 imposes some limitations on how software can be distributed. For example, it requires that anyone who distributes the software must also provide the source code, and must not add any additional restrictions on how the software can be used or distributed.
 
 For more information about this license please read the `LICENSE.md` file.
-
-## Some extra info:
-- You don't need need to unistall previous version of this app to install a new version.
-- If you run the installer with an older version installed it will automatically update it to a new verion.
-- Thank Inno Setup!
