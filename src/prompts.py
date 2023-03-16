@@ -4,11 +4,17 @@ from pynput.mouse import Button
 from configparser import ConfigParser
 import os
 
-# Import colors modules
-from src.classes.key import Key
-from src.mode import get_mode
-from src.settings import config_prompt
+# Import color module
 from src.colors.constants import RED, RESET, BLUE, YELLOW, CYAN
+
+# Import key module
+from src.classes.key import Key
+
+# Import get mode module
+from src.mode import get_mode
+
+# Import config prompt module
+from src.settings import config_prompt
 
 loaded_setting = None
 button_map = {"left mouse": Button.left, "right mouse": Button.right, "middle mouse": Button.middle}
