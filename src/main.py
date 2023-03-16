@@ -5,14 +5,14 @@ from sys import exit
 import time
 
 # import clicker modules
-from src.clickers.mouse_clicker import AutoClicker
-from src.clickers.keyboard_clicker import KeyboardClicker
+from src.classes.mouse_clicker import AutoClicker
+from src.classes.keyboard_clicker import KeyboardClicker
 
-# import colors modules
+# import color modules
 from src.colors.vtp import enable_vtp, disable_vtp
 from src.colors.constants import RESET, GREEN, CYAN, RED
 
-# import prompts modules
+# import prompts module
 from src.prompts import prompts
 
 # import settings module
@@ -40,12 +40,12 @@ if mode == 'm':
                 
                 # if autoclicker is not running, start it and print a message
                 if not auto_clicker.running:
-                    print(f"{GREEN}autoclicker started{RESET}")
+                    print(f"{CYAN}autoclicker started{RESET}")
                     auto_clicker.start_clicking()
                 
                 # if autoclicker is running, stop it and print a message
                 else:
-                    print(f"{CYAN}autoclicker stoped{RESET}")
+                    print(f"{GREEN}autoclicker stoped{RESET}")
                     auto_clicker.stop_clicking()
             
             # check if key pressed is the exit key
@@ -60,7 +60,9 @@ if mode == 'm':
                 auto_clicker.exit()
                 exit()
             
+            # check if key pressed is the backtick key
             elif key.char == '`':
+                # saves the users settings based on what mode it is
                 print(f"{CYAN}saving current settings...{RESET}")
                 save_settings(mode, toggle_key, exit_key, delay, button)
 
@@ -70,12 +72,12 @@ if mode == 'm':
                 
                 # if autoclicker is not running, start it and print a message
                 if not auto_clicker.running:
-                    print(f"{GREEN}autoclicker started{RESET}")
+                    print(f"{CYAN}autoclicker started{RESET}")
                     auto_clicker.start_clicking()
                 
                 # if autoclicker is running, stop it and print a message
                 else:
-                    print(f"{CYAN}autoclicker stoped{RESET}")
+                    print(f"{GREEN}autoclicker stoped{RESET}")
                     auto_clicker.stop_clicking()
             
             # check if the pressed key is the exit key (non character key)
@@ -130,7 +132,9 @@ if mode == 'k':
                 keyboard_clicker.exit()
                 exit()
             
+            # check if key pressed is the backtick key
             elif key.char == '`':
+                # saves the users settings based on what mode it is
                 print(f"{CYAN}saving current settings...{RESET}")
                 save_settings(mode, toggle_key, exit_key, delay, button)
         

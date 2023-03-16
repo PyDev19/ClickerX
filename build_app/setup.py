@@ -31,7 +31,7 @@ target = Executable(
 
 setup(
     name="PyClickerX",
-    version="2.1",
+    version="3",
     description="console based autoclicker",
     options={"build_exe": build_exe_options},
     executables=[target]
