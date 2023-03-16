@@ -1,29 +1,16 @@
 # Import the necessary modules.
 import os
-from pynput.keyboard import Key, Listener
 from pynput.mouse import Button
-from queue import Queue
 from configparser import ConfigParser
 
 # Import color module
 from src.colors.constants import CYAN, GREEN, RESET, YELLOW, RED
 
+# Import key module
+from src.classes.key import Key
+
 button_map = {"Button.left": Button.left, "Button.right": Button.right, "Button.middle": Button.middle}
-
-
-# Define the function that will be called when a key is pressed.
-def on_press(key: Key) -> None:
-    pass
-
-# Define the function that will be called when a key is released.
-def on_release(key: Key, queue: Queue) -> None:
-    try:
-        # Put the character key in the queue.
-        queue.put(key.char)
-    
-    except AttributeError:
-        # Put non-character keys in the queue.
-        queue.put(key.name)
+key = Key()
 
 # Define a function to get the key from the user, with a prompt string as a parameter.
 def config_prompt(prompt_string: str, mode: str, load_settings: bool):
@@ -34,48 +21,35 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
         prompt_string (str): A string representing the prompt to display to the user
     '''
     
-    # Create a new queue object to hold the key value.
-    key_queue = Queue()
+    input_key = key.get_key(prompt_string)
     
-    # Start a keyboard listener with the on_press and on_release functions.
-    # Use a lambda function to pass the queue object to the on_release function.
-    with Listener(on_press=on_press, on_release=lambda key: on_release(key, queue=key_queue)):
-        # Print the prompt string to the console.
-        # Use flush=True to ensure that the message is printed immediately.
-        # Use end='' to make sure that the next print statement is on the same line.
-        print(prompt_string, end='', flush=True)
+    # Checks if key pressed is "k"
+    if input_key == "y":
+        print(f"{YELLOW}{input_key}{RESET}")
+        print(f"{CYAN}Loading Conifg...{RESET}")
         
-        # Initialize the key value to None.
-        key = None
+        toggle_key, exit_key, delay, button = read_settings(mode)
+        load_settings = True
         
-        # Keep looping until a key value has been retrieved from the queue.
-        while key is None:
-            key = key_queue.get()
+        print(f"{GREEN}Done loading from config!{RESET}")
         
-        # Checks if key pressed is "k"
-        if key == "y":
-            print(f"{YELLOW}{key}{RESET}")
-            print(f"{CYAN}Loading Conifg...{RESET}")
-            toggle_key, exit_key, delay, button = read_settings(mode)
-            load_settings = True
-            print(f"{GREEN}Done loading from config!{RESET}")
-            
-        # Checks if key pressed is "m"
-        elif key == "n":
-            print(f"{YELLOW}{key}{RESET}")
-            print(f"{YELLOW}Continuing to prompts...{RESET}")
-            load_settings = False
-            toggle_key = None
-            exit_key = None
-            delay = None
-            button = None
+    # Checks if key pressed is "m"
+    elif input_key == "n":
+        print(f"{YELLOW}{input_key}{RESET}")
+        print(f"{YELLOW}Continuing to prompts...{RESET}")
         
-        # Checks if key pressed is neither "m" or "k"
-        elif key != "y" or key != "n":
-            print(f"{RED}Please enter either 'y' or 'n'{RESET}")
-            config_prompt('Would you like to load from settings (y/n): ', mode)
-        
-        return toggle_key, exit_key, delay, button, load_settings
+        load_settings = False
+        toggle_key = None
+        exit_key = None
+        delay = None
+        button = None
+    
+    # Checks if key pressed is neither "m" or "k"
+    elif input_key != "y" or input_key != "n":
+        print(f"{RED}Please enter either 'y' or 'n'{RESET}")
+        config_prompt('Would you like to load from settings (y/n): ', mode)
+    
+    return toggle_key, exit_key, delay, button, load_settings
 
 def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, button: str):
     config = ConfigParser()
