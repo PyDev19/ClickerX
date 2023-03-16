@@ -1,18 +1,22 @@
 # Import the necessary modules.
 import os
-from pynput import keyboard
+from pynput.keyboard import Key, Listener
+from pynput.mouse import Button
 from queue import Queue
 from configparser import ConfigParser
 
 # Import color module
 from src.colors.constants import CYAN, GREEN, RESET, YELLOW, RED, BLUE
 
+button_map = {"Button.left": Button.left, "Button.right": Button.right, "Button.middle": Button.middle}
+
+
 # Define the function that will be called when a key is pressed.
-def on_press(key: keyboard.Key) -> None:
+def on_press(key: Key) -> None:
     pass
 
 # Define the function that will be called when a key is released.
-def on_release(key: keyboard.Key, queue: Queue) -> None:
+def on_release(key: Key, queue: Queue) -> None:
     try:
         # Put the character key in the queue.
         queue.put(key.char)
@@ -35,7 +39,7 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
     
     # Start a keyboard listener with the on_press and on_release functions.
     # Use a lambda function to pass the queue object to the on_release function.
-    with keyboard.Listener(on_press=on_press, on_release=lambda key: on_release(key, queue=key_queue)):
+    with Listener(on_press=on_press, on_release=lambda key: on_release(key, queue=key_queue)):
         # Print the prompt string to the console.
         # Use flush=True to ensure that the message is printed immediately.
         # Use end='' to make sure that the next print statement is on the same line.
@@ -76,33 +80,43 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
 def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, button: str):
     config = ConfigParser()
     
+    if os.path.exists('settings.cfg'):
+        config.read('settings.cfg')
+    else:
+        with open('settings.cfg', mode="x") as file:
+            file.write('[KEYBOARD]\n')
+            file.write('toggle_key = None\n')
+            file.write('exit_key = None\n')
+            file.write('delay = None\n')
+            file.write('button = None\n\n')
+            
+            file.write('[MOUSE]\n')
+            file.write('toggle_key = None\n')
+            file.write('exit_key = None\n')
+            file.write('delay = None\n')
+            file.write('button = None')
+            
+            file.close()
+    
+    config.read('settings.cfg')
+    
     if mode == "k":
-        if config.has_section('KEYBOARD'):
+        if 'KEYBOARD' in config:
             config.remove_section('KEYBOARD')
             with open('settings.cfg', 'w') as config_file:
                 config.write(config_file)
-            
-        config.add_section('KEYBOARD')
-        config.set('KEYBOARD', 'toggle_key', toggle_key)
-        config.set('KEYBOARD', 'exit_key', exit_key)
-        config.set('KEYBOARD', 'delay', str(delay))
-        config.set('KEYBOARD', 'button', button)
         
+        config['KEYBOARD'] = {'toggle_key': toggle_key, 'exit_key': exit_key, 'Delay': delay, 'button': button}
         with open('settings.cfg', 'w') as config_file:
             config.write(config_file)
         
     elif mode == "m":
-        if config.has_section('MOUSE'):
+        if 'MOUSE' in config:
             config.remove_section('MOUSE')
             with open('settings.cfg', 'w') as config_file:
                 config.write(config_file)
-            
-        config.add_section('MOUSE')
-        config.set('MOUSE', 'toggle_key', toggle_key)
-        config.set('MOUSE', 'exit_key', exit_key)
-        config.set('MOUSE', 'delay', delay)
-        config.set('MOUSE', 'button', button)
         
+        config['MOUSE'] = {'toggle_key': toggle_key, 'exit_key': exit_key, 'Delay': delay, 'button': str(button)}
         with open('settings.cfg', 'w') as config_file:
             config.write(config_file)
     
@@ -120,6 +134,12 @@ def read_settings(mode):
     toggle_key = config[section]['toggle_key']
     exit_key = config[section]['exit_key']
     delay = float(config[section]['delay'])
-    button = config[section]['button']
+    
+    if mode == "m":
+        button = config[section]['button']
+        button = button_map.get(button, None)
+    elif mode == "k":
+        button = config[section]['button']
+    
     
     return toggle_key, exit_key, delay, button
