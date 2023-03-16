@@ -60,10 +60,12 @@ def prompts() -> Tuple[str, str, str, float, Button]:
         config.read("settings.cfg")
         
         if config.has_section('KEYBOARD') and mode == "k":
-            toggle_key, exit_key, delay, button, loaded_setting = config_prompt(f'{BLUE}Would you like to load from settings (y/n): {RESET}', mode, loaded_setting)
+            if config.get('KEYBOARD', 'toggle_key') != 'None':
+                toggle_key, exit_key, delay, button, loaded_setting = config_prompt(f'{BLUE}Would you like to load from settings (y/n): {RESET}', mode, loaded_setting)
         
         elif config.has_section('MOUSE') and mode == "m":
-            toggle_key, exit_key, delay, button, loaded_setting = config_prompt(f'{BLUE}Would you like to load from settings (y/n): {RESET}', mode, loaded_setting)
+            if config.get('MOUSE', 'toggle_key') != 'None':
+                toggle_key, exit_key, delay, button, loaded_setting = config_prompt(f'{BLUE}Would you like to load from settings (y/n): {RESET}', mode, loaded_setting)
 
         else:
             loaded_setting = False
