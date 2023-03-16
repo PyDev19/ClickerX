@@ -16,7 +16,7 @@ A simple terminal based autoclicker
 - ~~Add colors to print statements to make the app look better~~ (DONE!)
 - ~~Add a keyboard autoclicker mode, which will automatically press one key for you (I don't know where that would be usefull but still).~~ (DONE!)
 - Add a option where you can use your mouse to toggle the autoclicker (mainly for mouses that have sidebuttons)
-- Add a config option that will allow you to save your settings and open them every time you run the app, so you do not have to enter the same thing over and over again.
+- ~~Add a config option that will allow you to save your settings and open them every time you run the app, so you do not have to enter the same thing over and over again.~~ (DONE!)
 - Add a option to customize the colors of the inputs and save to a config
 
 ## Supported Platforms:
