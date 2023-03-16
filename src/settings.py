@@ -1,11 +1,10 @@
 # Import the necessary modules.
-import os
 from pynput import keyboard
 from queue import Queue
 from configparser import ConfigParser
 
 # Import color module
-from src.colors.constants import CYAN, GREEN, RESET, YELLOW, RED, BLUE
+from src.colors.constants import CYAN, GREEN, RESET, YELLOW, RED
 
 # Define the function that will be called when a key is pressed.
 def on_press(key: keyboard.Key) -> None:
@@ -100,7 +99,7 @@ def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, butto
         config.add_section('MOUSE')
         config.set('MOUSE', 'toggle_key', toggle_key)
         config.set('MOUSE', 'exit_key', exit_key)
-        config.set('MOUSE', 'delay', delay)
+        config.set('MOUSE', 'delay', str(delay))
         config.set('MOUSE', 'button', button)
         
         with open('settings.cfg', 'w') as config_file:
