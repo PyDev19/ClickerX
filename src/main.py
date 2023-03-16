@@ -40,12 +40,12 @@ if mode == 'm':
                 
                 # if autoclicker is not running, start it and print a message
                 if not auto_clicker.running:
-                    print(f"{GREEN}autoclicker started{RESET}")
+                    print(f"{CYAN}autoclicker started{RESET}")
                     auto_clicker.start_clicking()
                 
                 # if autoclicker is running, stop it and print a message
                 else:
-                    print(f"{CYAN}autoclicker stoped{RESET}")
+                    print(f"{GREEN}autoclicker stoped{RESET}")
                     auto_clicker.stop_clicking()
             
             # check if key pressed is the exit key
@@ -70,12 +70,12 @@ if mode == 'm':
                 
                 # if autoclicker is not running, start it and print a message
                 if not auto_clicker.running:
-                    print(f"{GREEN}autoclicker started{RESET}")
+                    print(f"{CYAN}autoclicker started{RESET}")
                     auto_clicker.start_clicking()
                 
                 # if autoclicker is running, stop it and print a message
                 else:
-                    print(f"{CYAN}autoclicker stoped{RESET}")
+                    print(f"{GREEN}autoclicker stoped{RESET}")
                     auto_clicker.stop_clicking()
             
             # check if the pressed key is the exit key (non character key)
