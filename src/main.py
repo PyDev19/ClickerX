@@ -60,7 +60,9 @@ if mode == 'm':
                 auto_clicker.exit()
                 exit()
             
+            # check if key pressed is the backtick key
             elif key.char == '`':
+                # saves the users settings based on what mode it is
                 print(f"{CYAN}saving current settings...{RESET}")
                 save_settings(mode, toggle_key, exit_key, delay, button)
 
@@ -130,7 +132,9 @@ if mode == 'k':
                 keyboard_clicker.exit()
                 exit()
             
+            # check if key pressed is the backtick key
             elif key.char == '`':
+                # saves the users settings based on what mode it is
                 print(f"{CYAN}saving current settings...{RESET}")
                 save_settings(mode, toggle_key, exit_key, delay, button)
         
