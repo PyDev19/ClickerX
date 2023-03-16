@@ -8,11 +8,11 @@ import time
 from src.classes.mouse_clicker import AutoClicker
 from src.classes.keyboard_clicker import KeyboardClicker
 
-# import colors modules
+# import color modules
 from src.colors.vtp import enable_vtp, disable_vtp
 from src.colors.constants import RESET, GREEN, CYAN, RED
 
-# import prompts modules
+# import prompts module
 from src.prompts import prompts
 
 # import settings module
