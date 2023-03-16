@@ -5,7 +5,7 @@ from configparser import ConfigParser
 import os
 
 # Import colors modules
-from src.key import Key
+from src.classes.key import Key
 from src.mode import get_mode
 from src.settings import config_prompt
 from src.colors.constants import RED, RESET, BLUE, YELLOW, CYAN

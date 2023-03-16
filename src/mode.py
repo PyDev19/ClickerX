@@ -1,6 +1,6 @@
 # Import color module
 from src.colors.constants import RESET, YELLOW, RED, BLUE
-from src.key import Key
+from src.classes.key import Key
 
 key = Key()
 
