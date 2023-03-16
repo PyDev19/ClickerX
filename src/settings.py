@@ -74,15 +74,37 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
         return toggle_key, exit_key, delay, button, load_settings
 
 def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, button: str):
-    config = ConfigParser(strict=False)
+    config = ConfigParser()
     
     if mode == "k":
-        config['KEYBOARD'] = {'toggle_key': toggle_key, 'exit_key': exit_key, 'delay': delay, 'button': button}
+        if config.has_section('KEYBOARD'):
+            config.remove_section('KEYBOARD')
+            with open('settings.cfg', 'w') as config_file:
+                config.write(config_file)
+            
+        config.add_section('KEYBOARD')
+        config.set('KEYBOARD', 'toggle_key', toggle_key)
+        config.set('KEYBOARD', 'exit_key', exit_key)
+        config.set('KEYBOARD', 'delay', str(delay))
+        config.set('KEYBOARD', 'button', button)
+        
+        with open('settings.cfg', 'w') as config_file:
+            config.write(config_file)
+        
     elif mode == "m":
-        config['MOUSE'] = {'toggle_key': toggle_key, 'exit_key': exit_key, 'delay': delay, 'button': button}
-    
-    with open('settings.cfg', 'a+') as config_file:
-        config.write(config_file)
+        if config.has_section('MOUSE'):
+            config.remove_section('MOUSE')
+            with open('settings.cfg', 'w') as config_file:
+                config.write(config_file)
+            
+        config.add_section('MOUSE')
+        config.set('MOUSE', 'toggle_key', toggle_key)
+        config.set('MOUSE', 'exit_key', exit_key)
+        config.set('MOUSE', 'delay', delay)
+        config.set('MOUSE', 'button', button)
+        
+        with open('settings.cfg', 'w') as config_file:
+            config.write(config_file)
     
     print(f"{GREEN}done saving settings, you can continue using autoclicker now{RESET}")    
 
