@@ -6,7 +6,7 @@ from queue import Queue
 from configparser import ConfigParser
 
 # Import color module
-from src.colors.constants import CYAN, GREEN, RESET, YELLOW, RED, BLUE
+from src.colors.constants import CYAN, GREEN, RESET, YELLOW, RED
 
 button_map = {"Button.left": Button.left, "Button.right": Button.right, "Button.middle": Button.middle}
 
