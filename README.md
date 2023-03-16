@@ -2,9 +2,10 @@
 A simple terminal based autoclicker
 
 ## Latest Changes:
-- Added a keyboar clicker that auto presses a set key on your keyboard
-- Added a prompt that asks if you want to use keyboard clicker or mouse autoclicker
-- Added different folders for clickers (keyboard and mouse clicker) and colors (vtp and constants)
+- Added config/settings feature to app
+- You can save your current key binds for the selected mode (keyboard/mouse)
+- You can load the settings after running the app again
+- You can change the settings by saving a new key bind set for the selected mode (keyboard/mouse)
 
 ## Features of PyClickerX:
 - Basically ever feature that an autoclicker already has.
