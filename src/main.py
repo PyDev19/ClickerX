@@ -5,8 +5,8 @@ from sys import exit
 import time
 
 # import clicker modules
-from src.clickers.mouse_clicker import AutoClicker
-from src.clickers.keyboard_clicker import KeyboardClicker
+from src.classes.mouse_clicker import AutoClicker
+from src.classes.keyboard_clicker import KeyboardClicker
 
 # import colors modules
 from src.colors.vtp import enable_vtp, disable_vtp
