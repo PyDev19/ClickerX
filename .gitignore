@@ -4,3 +4,4 @@ build/*
 
 setup.iss
 settings.cfg
+src/APP_VER
