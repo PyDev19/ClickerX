@@ -4,7 +4,7 @@ from pynput.mouse import Button
 from configparser import ConfigParser
 
 # Import color module
-from src.colors.constants import FIRST_INFO_COLOR, FINAL_INFO_COLOR, RESET, USER_INPUT_COLOR, END_INPUT_COLOR
+from src.colors.constants import FIRST_INFO_COLOR, FINAL_INFO_COLOR, RESET, USER_INPUT_COLOR, END_INFO_COLOR
 
 # Import key module
 from src.classes.key import Key
@@ -46,7 +46,7 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
     
     # Checks if key pressed is neither "m" or "k"
     elif input_key != "y" or input_key != "n":
-        print(f"{END_INPUT_COLOR}Please enter either 'y' or 'n'{RESET}")
+        print(f"{END_INFO_COLOR}Please enter either 'y' or 'n'{RESET}")
         config_prompt('Would you like to load from settings (y/n): ', mode)
     
     return toggle_key, exit_key, delay, button, load_settings
