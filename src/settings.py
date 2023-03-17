@@ -4,7 +4,7 @@ from pynput.mouse import Button
 from configparser import ConfigParser
 
 # Import color module
-from src.colors.constants import CYAN, GREEN, RESET, YELLOW, RED
+from src.colors.constants import FIRST_INFO_COLOR, FINAL_INFO_COLOR, RESET, USER_INPUT_COLOR, END_INPUT_COLOR
 
 # Import key module
 from src.classes.key import Key
@@ -25,18 +25,18 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
     
     # Checks if key pressed is "k"
     if input_key == "y":
-        print(f"{YELLOW}{input_key}{RESET}")
-        print(f"{CYAN}Loading Conifg...{RESET}")
+        print(f"{USER_INPUT_COLOR}{input_key}{RESET}")
+        print(f"{FIRST_INFO_COLOR}Loading Conifg...{RESET}")
         
         toggle_key, exit_key, delay, button = read_settings(mode)
         load_settings = True
         
-        print(f"{GREEN}Done loading from config!{RESET}")
+        print(f"{FINAL_INFO_COLOR}Done loading from config!{RESET}")
         
     # Checks if key pressed is "m"
     elif input_key == "n":
-        print(f"{YELLOW}{input_key}{RESET}")
-        print(f"{YELLOW}Continuing to prompts...{RESET}")
+        print(f"{USER_INPUT_COLOR}{input_key}{RESET}")
+        print(f"{USER_INPUT_COLOR}Continuing to prompts...{RESET}")
         
         load_settings = False
         toggle_key = None
@@ -46,7 +46,7 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
     
     # Checks if key pressed is neither "m" or "k"
     elif input_key != "y" or input_key != "n":
-        print(f"{RED}Please enter either 'y' or 'n'{RESET}")
+        print(f"{END_INPUT_COLOR}Please enter either 'y' or 'n'{RESET}")
         config_prompt('Would you like to load from settings (y/n): ', mode)
     
     return toggle_key, exit_key, delay, button, load_settings
@@ -94,7 +94,7 @@ def save_settings(mode: str, toggle_key: str, exit_key: str, delay: float, butto
         with open('settings.cfg', 'w') as config_file:
             config.write(config_file)
     
-    print(f"{GREEN}done saving settings, you can continue using autoclicker now{RESET}")    
+    print(f"{FINAL_INFO_COLOR}done saving settings, you can continue using autoclicker now{RESET}")    
 
 def read_settings(mode):
     config = ConfigParser()

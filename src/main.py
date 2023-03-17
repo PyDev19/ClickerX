@@ -10,13 +10,16 @@ from src.classes.keyboard_clicker import KeyboardClicker
 
 # import color modules
 from src.colors.vtp import enable_vtp, disable_vtp
-from src.colors.constants import RESET, GREEN, CYAN, RED
+from src.colors.constants import RESET, FINAL_INFO_COLOR, FIRST_INFO_COLOR, END_INFO_COLOR
 
 # import prompts module
 from src.prompts import prompts
 
 # import settings module
 from src.settings import save_settings
+
+# import styles module
+from src.styles import style_prompts
 
 # enable vtp when program starts
 enable_vtp()
@@ -40,18 +43,18 @@ if mode == 'm':
                 
                 # if autoclicker is not running, start it and print a message
                 if not auto_clicker.running:
-                    print(f"{CYAN}autoclicker started{RESET}")
+                    print(f"{FIRST_INFO_COLOR}autoclicker started{RESET}")
                     auto_clicker.start_clicking()
                 
                 # if autoclicker is running, stop it and print a message
                 else:
-                    print(f"{GREEN}autoclicker stoped{RESET}")
+                    print(f"{FINAL_INFO_COLOR}autoclicker stoped{RESET}")
                     auto_clicker.stop_clicking()
             
             # check if key pressed is the exit key
             elif key.char == exit_key:
                 # disable virtual terminal processing, print a message, wait for a second , and exit the program
-                print(f"{RED}exiting the program{RESET}")
+                print(f"{END_INFO_COLOR}exiting the program{RESET}")
                 
                 disable_vtp()
                 
@@ -63,8 +66,12 @@ if mode == 'm':
             # check if key pressed is the backtick key
             elif key.char == '`':
                 # saves the users settings based on what mode it is
-                print(f"{CYAN}saving current settings...{RESET}")
+                print(f"{FIRST_INFO_COLOR}saving current settings...{RESET}")
                 save_settings(mode, toggle_key, exit_key, delay, button)
+            
+            elif key.char == '.':
+                print(f"{FIRST_INFO_COLOR}Entering style changing mode...{RESET}")
+                style_prompts()
 
         except AttributeError:
             # check if the pressed key is the toggle key (non character key)
@@ -72,18 +79,18 @@ if mode == 'm':
                 
                 # if autoclicker is not running, start it and print a message
                 if not auto_clicker.running:
-                    print(f"{CYAN}autoclicker started{RESET}")
+                    print(f"{FIRST_INFO_COLOR}autoclicker started{RESET}")
                     auto_clicker.start_clicking()
                 
                 # if autoclicker is running, stop it and print a message
                 else:
-                    print(f"{GREEN}autoclicker stoped{RESET}")
+                    print(f"{FINAL_INFO_COLOR}autoclicker stoped{RESET}")
                     auto_clicker.stop_clicking()
             
             # check if the pressed key is the exit key (non character key)
             elif key.name == exit_key:
                 # disable virtual terminal processing, print a message , wait for a second, and exit program
-                print(f"{RED}exiting the program{RESET}")
+                print(f"{END_INFO_COLOR}exiting the program{RESET}")
                 
                 disable_vtp()
                 
@@ -112,18 +119,18 @@ if mode == 'k':
                 
                 # if keyboard clicker is not running, start it and print a message
                 if not keyboard_clicker.running:
-                    print(f"{GREEN}keyboard clicker started{RESET}")
+                    print(f"{FIRST_INFO_COLOR}keyboard clicker started{RESET}")
                     keyboard_clicker.start_clicking()
                 
                 # if keyboard clicker is running, stop it and print a message
                 else:
-                    print(f"{CYAN}keyboard clicker stoped{RESET}")
+                    print(f"{FINAL_INFO_COLOR}keyboard clicker stoped{RESET}")
                     keyboard_clicker.stop_clicking()
             
             # check if key pressed is the exit key
             elif key.char == exit_key:
                 # disable virtual terminal processing, print a message, wait for a second , and exit the program
-                print(f"{RED}exiting the program{RESET}")
+                print(f"{END_INFO_COLOR}exiting the program{RESET}")
                 
                 disable_vtp()
                 
@@ -135,8 +142,12 @@ if mode == 'k':
             # check if key pressed is the backtick key
             elif key.char == '`':
                 # saves the users settings based on what mode it is
-                print(f"{CYAN}saving current settings...{RESET}")
+                print(f"{FIRST_INFO_COLOR}saving current settings...{RESET}")
                 save_settings(mode, toggle_key, exit_key, delay, button)
+                
+            elif key.char == '.':
+                print(f"{FIRST_INFO_COLOR}Entering style changing mode...{RESET}")
+                style_prompts()
         
         except AttributeError:
             # check if the pressed key is the toggle key (non character key)
@@ -144,18 +155,18 @@ if mode == 'k':
                 
                 # if keyboard clicker is not running, start it and print a message
                 if not keyboard_clicker.running:
-                    print(f"{GREEN}keyboard clicker started{RESET}")
+                    print(f"{FIRST_INFO_COLOR}keyboard clicker started{RESET}")
                     keyboard_clicker.start_clicking()
                 
                 # if keyboard clicker is running, stop it and print a message
                 else:
-                    print(f"{CYAN}keyboard clicker stoped{RESET}")
+                    print(f"{FINAL_INFO_COLOR}keyboard clicker stoped{RESET}")
                     keyboard_clicker.stop_clicking()
             
             # check if the pressed key is the exit key (non character key)
             elif key.name == exit_key:
                 # disable virtual terminal processing, print a message , wait for a second, and exit program
-                print(f"{RED}exiting the program{RESET}")
+                print(f"{END_INFO_COLOR}exiting the program{RESET}")
                 
                 disable_vtp()
                 
