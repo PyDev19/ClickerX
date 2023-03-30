@@ -16,6 +16,8 @@ from src.mode import get_mode
 # Import config prompt module
 from src.settings import config_prompt
 
+from src.terminal import reset_terminal, lock_terminal
+
 loaded_setting = None
 button_map = {"left mouse": Button.left, "right mouse": Button.right, "middle mouse": Button.middle}
 key = Key()
@@ -70,14 +72,18 @@ def prompts() -> Tuple[str, str, str, float, Button]:
             button = key.get_key(f"{INPUT_COLOR}Key to be autoclicked (press any key): {RESET}")
             # Print the button that the user has pressed.
             print(USER_INPUT_COLOR + button + RESET)
+
+            reset_terminal()
             
             # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
-            delay = float(key.get_input(f"{INPUT_COLOR}Delay between key presses (in seconds): {USER_INPUT_COLOR}"))
+            delay = float(key.get_input_keyboard(f"{INPUT_COLOR}Delay between key presses (in seconds): {USER_INPUT_COLOR}"))
             print(f"{RESET}", end="")
             
         if mode == "m":
+            reset_terminal()
+
             # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
-            delay = float(key.get_input(f"{INPUT_COLOR}Delay between mouse clicks (in seconds): {USER_INPUT_COLOR}"))
+            delay = float(key.get_input_mouse(f"{INPUT_COLOR}Delay between mouse clicks (in seconds): {USER_INPUT_COLOR}"))
             print(f"{RESET}", end="")
             
             # Get key to be autoclicked from user by calling get_key function with a prompt message.
@@ -91,6 +97,8 @@ def prompts() -> Tuple[str, str, str, float, Button]:
                 button = input(f"{INPUT_COLOR}Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {USER_INPUT_COLOR}")
                 print(f"{RESET}", end="")
         
+    lock_terminal()
+
     # Print information about toggle key and exit key to the console.
     print("\n")
     
