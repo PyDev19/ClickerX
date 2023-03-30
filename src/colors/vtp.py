@@ -1,13 +1,4 @@
-import ctypes
-
-# Load the Windows API DLL
-kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
-
-# Define constants for console mode flags
-ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
-
-# Get the console handle
-console_handle = kernel32.GetStdHandle(-11)  # -11 is the constant for stdout
+import sys, termios, tty
 
 def enable_vtp() -> None:
     """
@@ -20,15 +11,14 @@ def enable_vtp() -> None:
         None
     """
     
-    # Get the current console mode
-    mode = ctypes.c_ulong()
-    kernel32.GetConsoleMode(console_handle, ctypes.byref(mode))
-
     # Enable virtual terminal processing
-    mode.value |= ENABLE_VIRTUAL_TERMINAL_PROCESSING
-
-    # Set the new console mode
-    kernel32.SetConsoleMode(console_handle, mode)
+    if hasattr(termios, "VT220"):
+        # Set the terminal to VT220 mode
+        tty.setcbreak(sys.stdin.fileno(), termios.TCSANOW)
+        
+        # Enable virtual terminal processing
+        sys.stdout.write('\x1b[?1h')
+        sys.stdout.flush()
 
 def disable_vtp() -> None:
     """
@@ -40,13 +30,11 @@ def disable_vtp() -> None:
     Returns: 
         None
     """
-    
-    # Get the current console mode
-    mode = ctypes.c_ulong()
-    kernel32.GetConsoleMode(console_handle, ctypes.byref(mode))
+    attrs = termios.tcgetattr(sys.stdin)
 
-    # Enable virtual terminal processing
-    mode.value |= ENABLE_VIRTUAL_TERMINAL_PROCESSING
+    # Disable virtual terminal processing
+    attrs[0] &= ~termios.ICANON
+    attrs[3] &= ~(termios.ECHO | termios.ECHONL | termios.ICRNL | termios.INLCR | termios.IXON | termios.IXOFF)
 
-    # Set the new console mode
-    kernel32.SetConsoleMode(console_handle, mode)
+    # Set the new terminal attributes
+    termios.tcsetattr(sys.stdin, termios.TCSAFLUSH, attrs)
