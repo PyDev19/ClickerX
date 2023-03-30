@@ -21,6 +21,9 @@ from src.settings import save_settings
 # import styles module
 from src.styles import style_prompts
 
+# import module to manage terminal
+from src.terminal import unlock_terminal
+
 # enable vtp when program starts
 enable_vtp()
 
@@ -60,6 +63,7 @@ if mode == 'm':
                 
                 time.sleep(1)
                 
+                unlock_terminal()
                 auto_clicker.exit()
                 exit()
             
@@ -96,6 +100,7 @@ if mode == 'm':
                 
                 time.sleep(1)
                 
+                unlock_terminal()
                 auto_clicker.exit()
                 exit()
 
@@ -136,6 +141,7 @@ if mode == 'k':
                 
                 time.sleep(1)
                 
+                unlock_terminal()
                 keyboard_clicker.exit()
                 exit()
             
@@ -169,9 +175,11 @@ if mode == 'k':
                 print(f"{END_INFO_COLOR}exiting the program{RESET}")
                 
                 disable_vtp()
+                unlock_terminal()
                 
                 time.sleep(1)
                 
+                unlock_terminal()
                 keyboard_clicker.exit()
                 exit()
 
