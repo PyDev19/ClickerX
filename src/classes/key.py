@@ -1,5 +1,5 @@
 # Import the necessary modules.
-import msvcrt
+import os, time
 from pynput.keyboard import Key as KeyType, Listener
 from queue import Queue
 
@@ -59,10 +59,10 @@ class Key:
             # Return the key value to the calling function.
             return key
     
-    # Defines function to get user input with a prompt string and returns user input string.
-    def get_input(self, prompt: str) -> str:
+    # Defines function to get user input with a prompt string and returns user input string, only for keyboard
+    def get_input_keyboard(self, prompt: str) -> str:
         """
-        Clears any key presses waiting to be processed and gets user input from the console and returns it as a string.
+        Prompts user for an input and then removes 'kqer' from the begining of the input.
 
         Args:
             prompt: A string representing the prompt to display to the user.
@@ -71,13 +71,44 @@ class Key:
             A string representing the user's input.
         """
         
-        # Loop to check if a key press is waiting to be processed.
-        while msvcrt.kbhit():
-            # Function to block a pending key press.
-            msvcrt.getch()
+        # Prompts the user
+        print(prompt, end='')
+
+        # Gets input from prompt
+        user_input = input('')
+        user_input = user_input.split('r')
+
+        if len(user_input) < 1:
+            user_input = user_input[0]
+        else:
+            user_input = user_input[1]
         
-        # Get input from user by asking prompt string from function parameter.
-        user_input = input(prompt)
+        # Return the user input value to the calling function.
+        return user_input
+
+    # Defines function to get user input with a prompt string and returns user input string, only for mouse
+    def get_input_mouse(self, prompt: str) -> str:
+        """
+        Prompts user for an input and then removes 'mqe' from the begining of the input.
+
+        Args:
+            prompt: A string representing the prompt to display to the user.
+
+        Returns:
+            A string representing the user's input.
+        """
+        
+        # Prompts the user
+        print(prompt, end='')
+
+        # Gets input from prompt
+        user_input = input('')
+        user_input = user_input.split('e')
+
+        if len(user_input) < 1:
+            user_input = user_input[0]
+        else:
+            user_input = user_input[1]
         
         # Return the user input value to the calling function.
         return user_input
