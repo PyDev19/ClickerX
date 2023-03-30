@@ -4,19 +4,19 @@
 VENV_DIR=env
 
 # Activate virtual environment
-source "./$VENV_DIR/Scripts/activate"
+source "./$VENV_DIR/bin/activate"
 
 # Define variables
 BUILD_DIR=build/app
 
 # Define functions
 function compile_py_files {
-    echo -e "\033[36mCompiling py files to pyc files\033[0m"
+    echo -e "\033[36mCompiling python files to python compiled files\033[0m"
     echo -e "\n"
 
-    py -m build_app.compile
+    python -m build_app.compile
 
-    echo -e "\033[36mDone compiling py files to pyc files\033[0m"
+    echo -e "\033[36mDone compiling python files to python compiled files\033[0m"
     echo -e "\n"
 }
 
@@ -46,7 +46,7 @@ compile_py_files
 echo -e "\033[36mFreezing app with cx_Freeze\033[0m"
 echo -e "\n"
 
-py -m build_app.setup build
+python -m build_app.setup build
 
 echo -e "\033[36mDone freezing app with cx_Freeze\033[0m"
 echo -e "\n"
@@ -58,3 +58,5 @@ echo -e "\033[32mDone app building process, final build is located in '$BUILD_DI
 echo -e "\n"
 
 sleep 2
+
+reset
