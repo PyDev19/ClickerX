@@ -36,7 +36,7 @@ A simple terminal based autoclicker
 7. If you want to build your own version of this program you should use cx_Freeze or pyinstaller and then use Inno Setup (or if you have your have another preffered to create installer) to create an installer for it.
 8. If you want to distribute your own version make sure to read the "Licensing" part of this readme and give credit to this github repository
 
-## How to run of linux:
+## How to run on linux:
 1. Download the zip from the [Latest Release](https://github.com/PyDev19/PyClickerX/releases)
 2. Extract the zip to where ever you like
 3. Open the terminal inside the location of the extracted zip
