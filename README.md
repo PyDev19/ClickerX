@@ -2,10 +2,7 @@
 A simple terminal based autoclicker
 
 ## Latest Changes:
-- Added config/settings feature to app
-- You can save your current key binds for the selected mode (keyboard/mouse)
-- You can load the settings after running the app again
-- You can change the settings by saving a new key bind set for the selected mode (keyboard/mouse)
+- Created a linux version of the app, which should work on ubuntu and ubuntu based distros, I do not know about other linux distros.
 
 ## Features of PyClickerX:
 - Basically ever feature that an autoclicker already has.
@@ -38,6 +35,12 @@ A simple terminal based autoclicker
     ```py -m src.main```
 7. If you want to build your own version of this program you should use cx_Freeze or pyinstaller and then use Inno Setup (or if you have your have another preffered to create installer) to create an installer for it.
 8. If you want to distribute your own version make sure to read the "Licensing" part of this readme and give credit to this github repository
+
+## How to run of linux:
+1. Download the zip from the [Latest Release](https://github.com/PyDev19/PyClickerX/releases)
+2. Extract the zip to where ever you like
+3. Open the terminal inside the location of the extracted zip
+4. Run the app by typing `./main`, if this doesn't work try running `chmod 777 main` and then try running `./main`
 
 ## Licensing:
 This project is licensed under the GNU General Public License version 3 (GNU GPLv3).
