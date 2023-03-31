@@ -39,6 +39,9 @@ def prompts() -> Tuple[str, str, str, float, Button]:
     
     config = ConfigParser()
     
+    # lock the terminal to prevent inputs
+    lock_terminal()
+
     # Gets mode of autoclicker by prompting the user
     mode = get_mode(f"{INPUT_COLOR}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
     
