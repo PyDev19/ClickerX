@@ -23,7 +23,7 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
     
     input_key = key.get_key(prompt_string)
     
-    # Checks if key pressed is "k"
+    # Checks if key pressed is "y"
     if input_key == "y":
         print(f"{USER_INPUT_COLOR}{input_key}{RESET}")
         print(f"{FIRST_INFO_COLOR}Loading Conifg...{RESET}")
@@ -33,7 +33,7 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
         
         print(f"{FINAL_INFO_COLOR}Done loading from config!{RESET}")
         
-    # Checks if key pressed is "m"
+    # Checks if key pressed is "n"
     elif input_key == "n":
         print(f"{USER_INPUT_COLOR}{input_key}{RESET}")
         print(f"{USER_INPUT_COLOR}Continuing to prompts...{RESET}")
@@ -46,8 +46,8 @@ def config_prompt(prompt_string: str, mode: str, load_settings: bool):
     
     # Checks if key pressed is neither "m" or "k"
     elif input_key != "y" or input_key != "n":
-        print(f"{END_INFO_COLOR}Please enter either 'y' or 'n'{RESET}")
-        config_prompt('Would you like to load from settings (y/n): ', mode)
+        print(f"\n{END_INFO_COLOR}Please enter either 'y' or 'n'{RESET}")
+        return config_prompt(prompt_string, mode, load_settings)
     
     return toggle_key, exit_key, delay, button, load_settings
 
