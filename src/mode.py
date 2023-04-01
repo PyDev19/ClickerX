@@ -31,7 +31,7 @@ def get_mode(prompt_string: str) -> str:
     # Checks if key pressed is neither "m" or "k"
     elif mode_key != "m" or key != "k":
         print(f"{END_INFO_COLOR}Please enter either 'k' or 'm'{RESET}")
-        get_mode(f"{INPUT_COLOR}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
+        return get_mode(f"{INPUT_COLOR}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
     
     # Return the key value to the calling function.
     return mode_key
