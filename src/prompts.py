@@ -24,7 +24,7 @@ key = Key()
 def prompts() -> Tuple[str, str, str, float, Button]:
     '''
     Prompts the user to input toggle_key, exit_key, delay, and button to be autoclicked.
-    Returns a tuple containing toggle_key, exit_key, delay, and button values enteEND_INFO_COLOR by the user.
+    Returns a tuple containing toggle_key, exit_key, delay, and button values entered by the user.
     
     Args:
         None
