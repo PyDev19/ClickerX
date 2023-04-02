@@ -5,6 +5,7 @@ A simple terminal based autoclicker
 - Added feature that allows you to change the style (look) of the print messages:
     1. You can pick from 18 text and background colors
     2. You can make the print messages have bold, underline, or reversed text.
+- The title changes accordind to the mode of the app
 
 ## Features of PyClickerX:
 - Basically ever feature that an autoclicker already has.
