@@ -2,26 +2,27 @@
 A simple terminal based autoclicker
 
 ## Latest Changes:
-- Added config/settings feature to app
-- You can save your current key binds for the selected mode (keyboard/mouse)
-- You can load the settings after running the app again
-- You can change the settings by saving a new key bind set for the selected mode (keyboard/mouse)
+- Added feature that allows you to change the style (look) of the print messages:
+    1. You can pick from 18 text and background colors
+    2. You can make the print messages have bold, underline, or reversed text.
 
 ## Features of PyClickerX:
 - Basically ever feature that an autoclicker already has.
 - Terminal based meaning the autoclicker runs in a terminal window if you run the exe, this makes program size very small (about 10 mb).
 - Has a keyboard clicker, that can press a set key with a set delay
+- You can save your settings so you can load them up the next time you run the app
+- You can changed the style (look) of the print messages and save them to the settings to make them look how you like it
 
 ## Future plans:
 - ~~Add colors to print statements to make the app look better~~ (DONE!)
 - ~~Add a keyboard autoclicker mode, which will automatically press one key for you (I don't know where that would be usefull but still).~~ (DONE!)
 - Add a option where you can use your mouse to toggle the autoclicker (mainly for mouses that have sidebuttons)
 - ~~Add a config option that will allow you to save your settings and open them every time you run the app, so you do not have to enter the same thing over and over again.~~ (DONE!)
-- Add a option to customize the colors of the inputs and save to a config
+- ~~Add a option to customize the colors of the inputs and save to a config~~ (DONE!)
 
 ## Supported Platforms:
 - Windows
-- That's it, I will try to get support for other platforms but right now I have made this app focused mainly with windows in mind.
+- Linux
 
 ## Customizing:
 1. Download source code from this github repository however you like
