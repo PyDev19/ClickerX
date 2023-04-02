@@ -108,7 +108,7 @@ def style_example(prompt: str, input: str, info: str, starting: str, stopping: s
     else:
         print(f'{exit}Exiting Program{RESET}')
 
-def style_prompts():  
+def style_prompts(toggle_key: str, exit_key: str):  
     print('Text Colors Available: | Background Colors Available: | Text Decoration Available: ')
     print(f'{BLACK}1. Black{RESET}               | {B_BLACK}1. Background Black{RESET}          | {BOLD}1. Bold Text{RESET}')
     print(f'{RED}2. Red{RESET}                 | {B_RED}2. Background Red{RESET}            | {UNDERLINE}2. Underline Text{RESET}')
@@ -195,14 +195,17 @@ def style_prompts():
     print('Saving styles to config...')
     save_styles_settings(prompt_style, input_style, info_style, process_starting_stlye, process_ending_stlye, end_error_style)
     print('Done saving styles to config')
+    print('Restart app to see changes')
+    
+    print('\n')
     
     print('Press ENTER to continue...')
     input()
     
     sys.stdout.write("\033c")
     sys.stdout.flush()
-
-if __name__ == "__main__":
-    enable_vtp()
-    style_prompts()
-
+    
+    print(f"{FIRST_INFO_COLOR}Toggle autoclicker by pressing {toggle_key} key{RESET}")
+    print(f"{FIRST_INFO_COLOR}Exit program by pressing {exit_key} key{RESET}")
+    print(f"{FIRST_INFO_COLOR}Save your settings by pressing ` key{RESET}")
+    print(f"{FIRST_INFO_COLOR}Change the style of the print messages by pressing . key{RESET}")
