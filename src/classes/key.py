@@ -1,6 +1,7 @@
 # Import the necessary modules.
 import msvcrt
-from pynput.keyboard import Key as KeyType, Listener
+from pynput.keyboard import Key as KeyType, Listener as KeyboardListener
+from pynput.mouse import Listener as MouseListener
 from queue import Queue
 
 class Key:
@@ -43,7 +44,7 @@ class Key:
         
         # Start a keyboard listener with the on_press and on_release functions.
         # Use a lambda function to pass the queue object to the on_release function.
-        with Listener(on_press=self.on_press, on_release=lambda key: self.on_release(key, queue=key_queue)):
+        with KeyboardListener(on_press=self.on_press, on_release=lambda key: self.on_release(key, queue=key_queue)):
             # Print the prompt string to the console.
             # Use flush=True to ensure that the message is printed immediately.
             # Use end='' to make sure that the next print statement is on the same line.
@@ -81,3 +82,29 @@ class Key:
         
         # Return the user input value to the calling function.
         return user_input
+    
+    def get_mouse_button(self, prompt_string: str):
+         # Create a new queue object to hold the mouse button value.
+        mouse_queue = Queue()
+        
+        def on_click(x, y, button, pressed, mouse_queue=mouse_queue):
+            if pressed:
+                # Add the button to the queue when it is pressed.
+                mouse_queue.put(button)
+        
+        with MouseListener(on_click=on_click):
+            # Print the prompt string to the console.
+            # Use flush=True to ensure that the message is printed immediately.
+            # Use end='' to make sure that the next print statement is on the same line.
+            print(prompt_string, end='', flush=True)
+            
+            # Initialize the key value to None.
+            mouse_button = None
+            
+            # Keep looping until a key value has been retrieved from the queue.
+            while mouse_button is None:
+                mouse_button = mouse_queue.get()
+
+            # Return the key value to the calling function.
+            return mouse_button
+
