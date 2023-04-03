@@ -17,7 +17,7 @@ from src.mode import get_mode
 from src.settings import config_prompt, create_cfg
 
 loaded_setting = None
-button_map = {"left mouse": Button.left, "right mouse": Button.right, "middle mouse": Button.middle}
+button_map = {Button.left: 'Left Mouse Button', Button.right: 'Right Mouse Button', Button.middle: 'Middle Mouse Button', Button.x1: 'Side Mouse Button 1', Button.x2: 'Side Mouse Button 2'}
 key = Key()
 
 # Function to get user input for toggle key, exit key, delay, and button to be autoclicked.
@@ -108,15 +108,9 @@ def prompts() -> Tuple[str, str, str, float, Button, str, str, str, str, str, st
             print(f"{RESET}", end="")
             
             # Get key to be autoclicked from user by calling get_key function with a prompt message.
-            button = input(f"{prompt_style}Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {input_style}")
-            print(f"{RESET}", end="")
-
-            # Check the button value entered by the user and assign corresponding Button enum value.
-            button = button_map.get(button.lower(), None)
-            if button == None:
-                print(f"{end_error_style}Please enter either left mouse, right mouse, or middle mouse{RESET}")
-                button = input(f"{prompt_style}Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {input_style}")
-                print(f"{RESET}", end="")
+            button = key.get_mouse_button(f"{prompt_style}Button to be autoclicked (click any mouse button): {input_style}")
+            button_name = button_map.get(button)
+            print(f'{input_style}{button_name}{RESET}')
     
     # Print information about toggle key and exit key to the console.
     print("\n")
