@@ -6,6 +6,7 @@ A simple terminal based autoclicker
     1. You can pick from 18 text and background colors
     2. You can make the print messages have bold, underline, or reversed text.
 - The title changes accordind to the mode of the app
+- Added feature that detects mouse clicks for button to be autoclicked prompt, so no need to type left mouse or right mouse, you can now just click left mouse button and right mouse button.
 
 ## Features of PyClickerX:
 - Basically ever feature that an autoclicker already has.
@@ -17,9 +18,9 @@ A simple terminal based autoclicker
 ## Future plans:
 - ~~Add colors to print statements to make the app look better~~ (DONE!)
 - ~~Add a keyboard autoclicker mode, which will automatically press one key for you (I don't know where that would be usefull but still).~~ (DONE!)
-- Add a option where you can use your mouse to toggle the autoclicker (mainly for mouses that have sidebuttons)
 - ~~Add a config option that will allow you to save your settings and open them every time you run the app, so you do not have to enter the same thing over and over again.~~ (DONE!)
 - ~~Add a option to customize the colors of the inputs and save to a config~~ (DONE!)
+- All Done!
 
 ## Supported Platforms:
 - Windows
