@@ -103,14 +103,14 @@ def prompts() -> Tuple[str, str, str, float, Button, str, str, str, str, str, st
             print(f"{RESET}", end="")
             
         if mode == "m":
-            # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
-            delay = float(key.get_input(f"{prompt_style}Delay between mouse clicks (in seconds): {input_style}"))
-            print(f"{RESET}", end="")
-            
             # Get key to be autoclicked from user by calling get_key function with a prompt message.
             button = key.get_mouse_button(f"{prompt_style}Button to be autoclicked (click any mouse button): {input_style}")
             button_name = button_map.get(button)
             print(f'{input_style}{button_name}{RESET}')
+            
+            # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
+            delay = float(key.get_input(f"{prompt_style}Delay between mouse clicks (in seconds): {input_style}"))
+            print(f"{RESET}", end="")
     
     # Print information about toggle key and exit key to the console.
     print("\n")
