@@ -2,10 +2,9 @@
 from typing import Tuple
 from pynput.mouse import Button
 from configparser import ConfigParser
-import os
 
 # Import color module
-from src.colors.constants import END_INFO_COLOR, RESET, INPUT_COLOR, USER_INPUT_COLOR, FIRST_INFO_COLOR
+from src.colors.constants import END_INFO_COLOR, RESET, INPUT_COLOR, USER_INPUT_COLOR, FIRST_INFO_COLOR, FINAL_INFO_COLOR
 
 # Import key module
 from src.classes.key import Key
@@ -14,103 +13,135 @@ from src.classes.key import Key
 from src.mode import get_mode
 
 # Import config prompt module
-from src.settings import config_prompt
+from src.settings import config_prompt, create_cfg
 
-from src.terminal import reset_terminal, lock_terminal
+# Import module to manage the terminal
+from src.terminal import lock_terminal, reset_terminal, unlock_terminal
 
 loaded_setting = None
-button_map = {"left mouse": Button.left, "right mouse": Button.right, "middle mouse": Button.middle}
+button_map = {Button.left: 'Left Mouse Button', Button.right: 'Right Mouse Button', Button.middle: 'Middle Mouse Button'}
 key = Key()
 
 # Function to get user input for toggle key, exit key, delay, and button to be autoclicked.
-def prompts() -> Tuple[str, str, str, float, Button]:
+def prompts() -> Tuple[str, str, str, float, Button, str, str, str, str, str, str]:
     '''
     Prompts the user to input toggle_key, exit_key, delay, and button to be autoclicked.
-    Returns a tuple containing toggle_key, exit_key, delay, and button values enteEND_INFO_COLOR by the user.
+    Returns a tuple containing toggle_key, exit_key, delay, and button values entered by the user.
     
     Args:
         None
         
     Returns:
-        A tuple containing mode (str, toggle_key (str), exit_key (str), delay (float), and button (Button enum value).
+        Tuple[str, str, str, float, Button, str, str, str, str, str, str]
     '''
+    
+    # Create the config file to hold the settings
+    create_cfg()
+
+    # Unlock the terminal
+    lock_terminal()
     
     global loaded_setting
     
     config = ConfigParser()
+    config.read("settings.cfg")
     
-    # lock the terminal to prevent inputs
-    lock_terminal()
-
+    prompt_style = config['STYLE']['prompt_style']
+    input_style = config['STYLE']['input_style']
+    info_style = config['STYLE']['info_style']
+    process_starting_stlye = config['STYLE']['process_starting_stlye']
+    process_ending_stlye = config['STYLE']['process_ending_stlye']
+    end_error_style = config['STYLE']['end_error_style']
+        
+    if prompt_style == '' or prompt_style == 'None':
+        prompt_style = INPUT_COLOR
+    
+    if input_style == '' or input_style == 'None':
+        input_style = USER_INPUT_COLOR
+    
+    if info_style == '' or info_style == 'None':
+        info_style = FIRST_INFO_COLOR
+    
+    if process_starting_stlye == '' or process_starting_stlye == 'None':
+        process_starting_stlye = FIRST_INFO_COLOR
+    
+    if process_ending_stlye == '' or process_ending_stlye == 'None':
+        process_ending_stlye = FINAL_INFO_COLOR
+    
+    if end_error_style == '' or end_error_style == 'None':
+        end_error_style = END_INFO_COLOR
+    
     # Gets mode of autoclicker by prompting the user
-    mode = get_mode(f"{INPUT_COLOR}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}")
-    
-    if os.path.exists('settings.cfg'):
-        config.read("settings.cfg")
-        
-        if config.has_section('KEYBOARD') and mode == "k":
-            if config.get('KEYBOARD', 'toggle_key') != 'None':
-                toggle_key, exit_key, delay, button, loaded_setting = config_prompt(f'{INPUT_COLOR}Would you like to load from settings (y/n): {RESET}', mode, loaded_setting)
-        
-        elif config.has_section('MOUSE') and mode == "m":
-            if config.get('MOUSE', 'toggle_key') != 'None':
-                toggle_key, exit_key, delay, button, loaded_setting = config_prompt(f'{INPUT_COLOR}Would you like to load from settings (y/n): {RESET}', mode, loaded_setting)
+    mode = get_mode(f"{prompt_style}What mode of autoclick do you want to use\n1. Keyboard autoclicker (k)\n2. Mouse autoclicker (m)\n {RESET}", input_style, end_error_style, prompt_style)
 
-        else:
-            loaded_setting = False
+    config.read("settings.cfg")
+    
+    if config.has_section('KEYBOARD') and mode == "k":
+        if config.get('KEYBOARD', 'toggle_key') != 'None':
+            toggle_key, exit_key, delay, button, loaded_setting = config_prompt(f'{prompt_style}Would you like to load from settings (y/n): {RESET}', mode, loaded_setting, input_style, process_starting_stlye, process_ending_stlye, end_error_style)
+    
+    elif config.has_section('MOUSE') and mode == "m":
+        if config.get('MOUSE', 'toggle_key') != 'None':
+            toggle_key, exit_key, delay, button, loaded_setting = config_prompt(f'{prompt_style}Would you like to load from settings (y/n): {RESET}', mode, loaded_setting, input_style, process_starting_stlye, process_ending_stlye, end_error_style)
+
+    else:
+        loaded_setting = False
     
     if not loaded_setting:
         # Get toggle key from user by calling get_key function with a prompt message.
-        toggle_key = key.get_key(f"{INPUT_COLOR}Key to toggle autoclicker (press any key): {RESET}")
+        toggle_key = key.get_key(f"{prompt_style}Key to toggle autoclicker (press any key): {RESET}")
         # Print the toggle_key that the user has pressed.
-        print(USER_INPUT_COLOR + toggle_key + RESET)
+        print(input_style + toggle_key + RESET)
         
         # Get exit key from user by calling get_key function with a prompt message.
-        exit_key = key.get_key(f"{INPUT_COLOR}Key to exit program (press any key): {RESET}")
+        exit_key = key.get_key(f"{prompt_style}Key to exit program (press any key): {RESET}")
         # Print the exit_key that the user has pressed.
-        print(USER_INPUT_COLOR + exit_key + RESET)
+        print(input_style + exit_key + RESET)
         
         if mode == "k":
             # Get key to be autoclicked from user by calling get_key function with a prompt message.
-            button = key.get_key(f"{INPUT_COLOR}Key to be autoclicked (press any key): {RESET}")
+            button = key.get_key(f"{prompt_style}Key to be autoclicked (press any key): {RESET}")
             # Print the button that the user has pressed.
-            print(USER_INPUT_COLOR + button + RESET)
+            print(input_style + button + RESET)
 
+            # Unlock terminal
+            unlock_terminal()
+
+            # Reset terminal back to defaults
             reset_terminal()
             
             # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
-            delay = float(key.get_input_keyboard(f"{INPUT_COLOR}Delay between key presses (in seconds): {USER_INPUT_COLOR}"))
+            delay = float(key.get_input(f"{prompt_style}Delay between key presses (in seconds): {input_style}"))
             print(f"{RESET}", end="")
             
         if mode == "m":
-            reset_terminal()
-
-            # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
-            delay = float(key.get_input_mouse(f"{INPUT_COLOR}Delay between mouse clicks (in seconds): {USER_INPUT_COLOR}"))
-            print(f"{RESET}", end="")
-            
             # Get key to be autoclicked from user by calling get_key function with a prompt message.
-            button = input(f"{INPUT_COLOR}Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {USER_INPUT_COLOR}")
+            button = key.get_mouse_button(f"{prompt_style}Button to be autoclicked (click any mouse button): {input_style}")
+            button_name = button_map.get(button)
+            print(f'{input_style}{button_name}{RESET}')
+
+            # Unlock terminal
+            # unlock_terminal()
+
+            # Reset terminal back to defaults
+            reset_terminal()
+            
+            # Get delay between key presses in seconds from user by calling get_input function with a prompt message.
+            delay = float(key.get_input(f"{prompt_style}Delay between mouse clicks (in seconds): {input_style}"))
             print(f"{RESET}", end="")
-
-            # Check the button value entered by the user and assign corresponding Button enum value.
-            button = button_map.get(button.lower(), None)
-            if button == None:
-                print(f"{END_INFO_COLOR}Please enter either left mouse, right mouse, or middle mouse{RESET}")
-                button = input(f"{INPUT_COLOR}Button to be autoclicked (Left Mouse, Right Mouse, Middle Mouse): {USER_INPUT_COLOR}")
-                print(f"{RESET}", end="")
-        
-    lock_terminal()
-
+    
     # Print information about toggle key and exit key to the console.
     print("\n")
     
-    print(f"{FIRST_INFO_COLOR}Toggle autoclicker by pressing {toggle_key} key{RESET}")
-    print(f"{FIRST_INFO_COLOR}Exit program by pressing {exit_key} key{RESET}")
-    print(f"{FIRST_INFO_COLOR}Save your settings by pressing ` key{RESET}")
-    print(f"{FIRST_INFO_COLOR}Change the style of the print messages by pressing . key{RESET}")
+    print(f"{info_style}Toggle autoclicker by pressing {toggle_key} key{RESET}")
+    print(f"{info_style}Exit program by pressing {exit_key} key{RESET}")
+    print(f"{info_style}Save your settings by pressing ` key{RESET}")
+    print(f"{info_style}Change the style of the print messages by pressing . key{RESET}")
     
     print("\n")
 
+    # Lock the terminal
+    lock_terminal()
+
     # Return the toggle key, exit key, delay, and button values to the calling function.
-    return mode, toggle_key, exit_key, delay, button
+    return mode, toggle_key, exit_key, delay, button, prompt_style, input_style, info_style, process_starting_stlye, process_ending_stlye, end_error_style
