@@ -3,7 +3,7 @@ import py_compile, time
 from src.colors.constants import RESET, CYAN, GREEN
 from src.colors.vtp import enable_vtp, disable_vtp
 
-files = ["main.py", "classes/mouse_clicker.py", "classes/keyboard_clicker.py", "prompts.py", "classes/key.py", "mode.py", "colors/vtp.py", "colors/constants.py", "settings.py"]
+files = ["main.py", "classes/mouse_clicker.py", "classes/keyboard_clicker.py", "prompts.py", "classes/key.py", "mode.py", "colors/vtp.py", "colors/constants.py", "settings.py", "terminal.py"]
 files_directory = "src"
 compiled_directory = "build/compiled_files"
 
