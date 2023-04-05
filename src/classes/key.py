@@ -1,6 +1,7 @@
 # Import the necessary modules.
-import os, time
+import sys, termios
 from pynput.keyboard import Key as KeyType, Listener
+from pynput.mouse import Listener as MouseListener, Button
 from queue import Queue
 
 class Key:
@@ -60,7 +61,7 @@ class Key:
             return key
     
     # Defines function to get user input with a prompt string and returns user input string, only for keyboard
-    def get_input_keyboard(self, prompt: str) -> str:
+    def get_input(self, prompt: str) -> str:
         """
         Prompts user for an input and then removes 'kqer' from the begining of the input.
 
@@ -71,44 +72,38 @@ class Key:
             A string representing the user's input.
         """
         
+        termios.tcflush(sys.stdin, termios.TCIOFLUSH)
+
         # Prompts the user
         print(prompt, end='')
 
         # Gets input from prompt
         user_input = input('')
-        user_input = user_input.split('r')
-
-        if len(user_input) < 1:
-            user_input = user_input[0]
-        else:
-            user_input = user_input[1]
         
         # Return the user input value to the calling function.
         return user_input
-
-    # Defines function to get user input with a prompt string and returns user input string, only for mouse
-    def get_input_mouse(self, prompt: str) -> str:
-        """
-        Prompts user for an input and then removes 'mqe' from the begining of the input.
-
-        Args:
-            prompt: A string representing the prompt to display to the user.
-
-        Returns:
-            A string representing the user's input.
-        """
+    
+    def get_mouse_button(self, prompt_string: str) -> Button:
+        # Create a new queue object to hold the mouse button value.
+        mouse_queue = Queue()
         
-        # Prompts the user
-        print(prompt, end='')
-
-        # Gets input from prompt
-        user_input = input('')
-        user_input = user_input.split('e')
-
-        if len(user_input) < 1:
-            user_input = user_input[0]
-        else:
-            user_input = user_input[1]
+        def on_click(x, y, button, pressed, mouse_queue=mouse_queue):
+            if pressed:
+                # Add the button to the queue when it is pressed.
+                mouse_queue.put(button)
         
-        # Return the user input value to the calling function.
-        return user_input
+        with MouseListener(on_click=on_click):
+            # Print the prompt string to the console.
+            # Use flush=True to ensure that the message is printed immediately.
+            # Use end='' to make sure that the next print statement is on the same line.
+            print(prompt_string, end='', flush=True)
+            
+            # Initialize the key value to None.
+            mouse_button = None
+            
+            # Keep looping until a key value has been retrieved from the queue.
+            while mouse_button is None:
+                mouse_button = mouse_queue.get()
+
+            # Return the key value to the calling function.
+            return mouse_button
