@@ -1,55 +1,47 @@
 # PyClickerX
-A simple terminal based autoclicker
 
-## Latest Changes:
-- Created a linux version of the app, which should work on ubuntu and ubuntu based distros, I do not know about other linux distros.
+PyClickerX is a terminal-based autoclicker written in Python. It allows users to automate mouse clicks at specified intervals.
 
-## Features of PyClickerX:
-- Basically ever feature that an autoclicker already has.
-- Terminal based meaning the autoclicker runs in a terminal window if you run the exe, this makes program size very small (about 10 mb).
-- Has a keyboard clicker, that can press a set key with a set delay
+## Warning: This app on linux only runs on a Xorg display
 
-## Future plans:
-- ~~Add colors to print statements to make the app look better~~ (DONE!)
-- ~~Add a keyboard autoclicker mode, which will automatically press one key for you (I don't know where that would be usefull but still).~~ (DONE!)
-- Add a option where you can use your mouse to toggle the autoclicker (mainly for mouses that have sidebuttons)
-- ~~Add a config option that will allow you to save your settings and open them every time you run the app, so you do not have to enter the same thing over and over again.~~ (DONE!)
-- Add a option to customize the colors of the inputs and save to a config
+## Getting Started
+To download and use PyClickerX for linux follow the given steps below:
+1. Download the tarball file from the [latest release](https://github.com/PyDev19/PyClickerX/releases)
+2. Extract the tarball to any directory you want and rename it to what you want
+3. If you have a desktop enviorment that supports desktop icons then follow the steps bellow, if not then just run `launch.sh` from the terminal like so: `./launch.sh`
+4. If you want to create a desktop shortcut for this app, then create a `PyClickerX.desktop` file on the desktop.
+5. Write in the desktop file like so:
+    ```
+    [Desktop Entry]
+    Terminal=false
+    Type=Application
+    Name=PyClickerX
+    Exec=/path/to/application/folder/launch.sh
+    Icon=/path/to/application/folder/icon.ico
+    ```
+6. Replace `/path/to/application/folder/` with the folder where you extracted the application tarball to. I recommend you put it somewhere inside the `home` folder.
+7. After making the above changes, right click on the file and click `Allow Launching` if all the directories are correct then the icon of the app should appear on the desktop and if you run it, it should open a terminal window with the app running inside it. 
 
-## Supported Platforms:
-- Windows
-- That's it, I will try to get support for other platforms but right now I have made this app focused mainly with windows in mind.
+## Features
 
-## Customizing:
-1. Download source code from this github repository however you like
-2. Create a venv in the root directory of the source code like so:
+- Simulate mouse clicks at specified intervals.
+- Adjust the click interval and duration according to your requirements.
+- Choose between left, right, or middle mouse button clicks.
+- Choose which key to press to start/stop autoclicker and exit the program
+- Press '`' (backtick) to save your settings for future use
+- Press '.' (dot) to change color and text decoration of prompts (saves in settings)
+- Supports keyboard clicker to autoclick a key on your keyboard (saves in settings)
 
-    ```py -m venv venv```
-3. Activate the venv.
-4. Download all required modules from `requirements.txt` like so:
+## Contributing
 
-    ```pip install -r requirements```
-5. Now make whatever changes you want to the program, all main python files are in src folder.
-6. To run the program, make sure your working directory in your terminal is the root directory and then run like so:
+Contributions to PyClickerX are always welcome! If you'd like to contribute, please follow these steps:
 
-    ```py -m src.main```
-7. If you want to build your own version of this program you should use cx_Freeze or pyinstaller and then use Inno Setup (or if you have your have another preffered to create installer) to create an installer for it.
-8. If you want to distribute your own version make sure to read the "Licensing" part of this readme and give credit to this github repository
+1. Fork the repository.
+2. Create a new branch: `git checkout -b my-new-feature`.
+3. Make your changes and commit them: `git commit -am 'Add some feature'`.
+4. Push your changes to the forked repository: `git push origin my-new-feature`.
+5. Create a new Pull Request.
 
-## How to run on linux:
-1. Download the zip from the [Latest Release](https://github.com/PyDev19/PyClickerX/releases)
-2. Extract the zip to where ever you like
-3. Open the terminal inside the location of the extracted zip
-4. Run the app by typing `./main`, if this doesn't work try running `chmod 777 main` and then try running `./main`
+## License
 
-## Licensing:
-This project is licensed under the GNU General Public License version 3 (GNU GPLv3).
-
-### Here are some key features of the GNU GPLv3 license:
-1. Copyleft: The GNU GPLv3 requires anyone who distributes software that is licensed under it to also distribute the source code and license of that software under the same terms. This helps to ensure that software remains free and open source.
-2. Permissive use: Users are allowed to use, modify, and distribute software that is licensed under the GNU GPLv3 without needing to pay for a license or obtain permission from the original authors.
-3. Patent protection: The GNU GPLv3 includes provisions to help protect against software patents. These provisions state that anyone who distributes software under the license grants a patent license to recipients, protecting them from patent infringement claims related to that software.
-4. Disclaimer of warranty: The GNU GPLv3 includes a disclaimer of warranty that states that the software is provided "as is" without any warranty or guarantee.
-5. Distribution limitations: The GNU GPLv3 imposes some limitations on how software can be distributed. For example, it requires that anyone who distributes the software must also provide the source code, and must not add any additional restrictions on how the software can be used or distributed.
-
-For more information about this license please read the `LICENSE.md` file.
+PyClickerX is licensed under the GNU-GPLv3 License. See the [LICENSE](LICENSE) file for more information.
