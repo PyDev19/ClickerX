@@ -2,7 +2,7 @@
 A simple terminal based autoclicker
 
 ## Latest Changes:
-The change logs and latest changes can be found in `[changelogs.md](changelog.md)`
+The change logs and latest changes can be found in [`changelogs.md`](changelog.md)
 <!-- - Added feature that allows you to change the style (look) of the print messages: -->
 <!--     1. You can pick from 18 text and background colors -->
 <!--     2. You can make the print messages have bold, underline, or reversed text. -->
