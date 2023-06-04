@@ -2,11 +2,12 @@
 A simple terminal based autoclicker
 
 ## Latest Changes:
-- Added feature that allows you to change the style (look) of the print messages:
-    1. You can pick from 18 text and background colors
-    2. You can make the print messages have bold, underline, or reversed text.
-- The title changes accordind to the mode of the app
-- Added feature that detects mouse clicks for button to be autoclicked prompt, so no need to type left mouse or right mouse, you can now just click left mouse button and right mouse button.
+The change logs and latest changes can be found in `[changelogs.md](changelog.md)`
+<!-- - Added feature that allows you to change the style (look) of the print messages: -->
+<!--     1. You can pick from 18 text and background colors -->
+<!--     2. You can make the print messages have bold, underline, or reversed text. -->
+<!-- - The title changes accordind to the mode of the app -->
+<!-- - Added feature that detects mouse clicks for button to be autoclicked prompt, so no need to type left mouse or right mouse, you can now just click left mouse button and right mouse button. -->
 
 ## Features of PyClickerX:
 - Basically ever feature that an autoclicker already has.
