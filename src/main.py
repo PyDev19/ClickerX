@@ -24,7 +24,7 @@ from src.styles import style_prompts
 # enable vtp when program starts
 enable_vtp()
 
-os.system('title PyClickerX 4')
+os.system('title ClickerX 4')
 
 # get user input through command line prompts
 mode, toggle_key, exit_key, delay, button, prompt_style, input_style, info_style, process_starting_stlye, process_ending_stlye, end_error_style = prompts()
@@ -46,20 +46,20 @@ if mode == 'm':
                 # if autoclicker is not running, start it and print a message
                 if not auto_clicker.running:
                     print(f"{process_starting_stlye}Autoclicker Started{RESET}")
-                    os.system('title PyClickerX 4: Autoclicker Started')
+                    os.system('title ClickerX 4: Autoclicker Started')
                     auto_clicker.start_clicking()
                 
                 # if autoclicker is running, stop it and print a message
                 else:
                     print(f"{process_ending_stlye}Autoclicker Stoped{RESET}")
-                    os.system('title PyClickerX 4: Autoclicker Stoped')
+                    os.system('title ClickerX 4: Autoclicker Stoped')
                     auto_clicker.stop_clicking()
             
             # check if key pressed is the exit key
             elif key.char == exit_key:
                 # disable virtual terminal processing, print a message, wait for a second , and exit the program
                 print(f"{end_error_style}Exiting The Program{RESET}")
-                os.system('title PyClickerX 4: Exiting The Program')
+                os.system('title ClickerX: Exiting The Program')
                 
                 disable_vtp()
                 
@@ -85,20 +85,20 @@ if mode == 'm':
                 # if autoclicker is not running, start it and print a message
                 if not auto_clicker.running:
                     print(f"{process_starting_stlye}Autoclicker Started{RESET}")
-                    os.system('title PyClickerX 4: Autoclicker Started')
+                    os.system('title ClickerX: Autoclicker Started')
                     auto_clicker.start_clicking()
                 
                 # if autoclicker is running, stop it and print a message
                 else:
                     print(f"{process_ending_stlye}Autoclicker Stoped{RESET}")
-                    os.system('title PyClickerX 4: Autoclicker Stoped')
+                    os.system('title ClickerXoped')
                     auto_clicker.stop_clicking()
             
             # check if the pressed key is the exit key (non character key)
             elif key.name == exit_key:
                 # disable virtual terminal processing, print a message , wait for a second, and exit program
                 print(f"{end_error_style}Exiting The Program{RESET}")
-                os.system('title PyClickerX 4: Exiting The Program')
+                os.system('title ClickerX: Exiting The Program')
                 
                 disable_vtp()
                 
@@ -128,20 +128,20 @@ if mode == 'k':
                 # if keyboard clicker is not running, start it and print a message
                 if not keyboard_clicker.running:
                     print(f"{process_starting_stlye}Keyboard Clicker Started{RESET}")
-                    os.system('title PyClickerX 4: Autoclicker Started')
+                    os.system('title ClickerX 4: Autoclicker Started')
                     keyboard_clicker.start_clicking()
                 
                 # if keyboard clicker is running, stop it and print a message
                 else:
                     print(f"{process_ending_stlye}Keyboard Clicker Stoped{RESET}")
-                    os.system('title PyClickerX 4: Autoclicker Stoped')
+                    os.system('title ClickerX 4: Autoclicker Stoped')
                     keyboard_clicker.stop_clicking()
             
             # check if key pressed is the exit key
             elif key.char == exit_key:
                 # disable virtual terminal processing, print a message, wait for a second , and exit the program
                 print(f"{end_error_style}Exiting The Program{RESET}")
-                os.system('title PyClickerX 4: Exiting The Program')
+                os.system('title ClickerX 4: Exiting The Program')
                 
                 disable_vtp()
                 
@@ -167,20 +167,20 @@ if mode == 'k':
                 # if keyboard clicker is not running, start it and print a message
                 if not keyboard_clicker.running:
                     print(f"{process_starting_stlye}Keyboard Clicker Started{RESET}")
-                    os.system('title PyClickerX 4: Autoclicker Started')
+                    os.system('title ClickerX 4: Autoclicker Started')
                     keyboard_clicker.start_clicking()
                 
                 # if keyboard clicker is running, stop it and print a message
                 else:
                     print(f"{process_ending_stlye}Keyboard Clicker Stoped{RESET}")
-                    os.system('title PyClickerX 4: Autoclicker Stoped')
+                    os.system('title ClickerX 4: Autoclicker Stoped')
                     keyboard_clicker.stop_clicking()
             
             # check if the pressed key is the exit key (non character key)
             elif key.name == exit_key:
                 # disable virtual terminal processing, print a message , wait for a second, and exit program
                 print(f"{end_error_style}Exiting The Program{RESET}")
-                os.system('title PyClickerX 4: Exiting The Program')
+                os.system('title ClickerX 4: Exiting The Program')
                 
                 disable_vtp()
                 

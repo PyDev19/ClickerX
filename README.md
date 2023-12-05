@@ -1,10 +1,10 @@
-# PyClickerX
+# ClickerX
 A simple terminal based autoclicker
 
 ## Latest Changes:
 The change logs and latest changes can be found in [`changelogs.md`](changelog.md)
 
-## Features of PyClickerX:
+## Features of ClickerX:
 - Basically ever feature that an autoclicker already has.
 - Terminal based meaning the autoclicker runs in a terminal window if you run the exe, this makes program size very small (about 10 mb).
 - Has a keyboard clicker, that can press a set key with a set delay
