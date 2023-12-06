@@ -10,6 +10,8 @@ qt_standard_project_setup()
 
 qt_add_executable(ClickerX
     src/main.cpp
+    src/main.qml
+    resources.qrc
 )
 
 target_link_libraries(ClickerX PRIVATE Qt6::Gui Qt6::Core Qt6::Qml)
