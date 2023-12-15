@@ -1,0 +1,1 @@
+App icon by [Creatype](https://www.flaticon.com/authors/creatype) on Flaticon
