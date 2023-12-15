@@ -1,6 +1,7 @@
 <RCC>
-    <qresource prefix="qml">
-        <file alias="main.qml">src/main.qml</file>
-        <file alias="components/NumberField.qml">src/components/NumberField.qml</file>
+    <qresource prefix="/icons">
+        <file alias="icon.ico">icons/icon.ico</file>
+        <file alias="icon_16x16.png">icons/icon_16x16.png</file>
+        <file alias="icon_32x32.png">icons/icon_32x32.png</file>
     </qresource>
 </RCC>
