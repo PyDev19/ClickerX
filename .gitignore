@@ -1,3 +1,5 @@
 env
 .vscode
 build
+qml_files
+*.sh
