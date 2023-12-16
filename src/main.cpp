@@ -1,5 +1,6 @@
 #include <QQmlApplicationEngine>
 #include <QGuiApplication>
+#include <QQmlContext>
 #include <QIcon>
 #include <ui.hpp>
 
@@ -9,6 +10,9 @@ int main(int argc, char *argv[]) {
 
     QQmlApplicationEngine engine;
 
+    UI ui(engine);
+    engine.rootContext()->setContextProperty("ui", &ui);
+
     engine.load(QUrl("qrc:qml/main.qml"));
 
     QList<QObject*> root_objects = engine.rootObjects();
@@ -16,8 +20,7 @@ int main(int argc, char *argv[]) {
 
     QObject* root_object = root_objects.first();
 
-	UI ui(engine, root_object);
-	if (ui.setup_ui() == -1) {
+	if (ui.setup_ui(root_object) == -1) {
 		return -1;
 	}
 
