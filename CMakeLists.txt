@@ -6,13 +6,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_PREFIX_PATH "C:/Qt/6.6.1/msvc2019_64")
 set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOMOC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Gui Qml Quick)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Qml Quick QuickControls2 QuickTemplates2)
 qt_standard_project_setup()
 
 qt_add_executable(ClickerX
     src/main.cpp
     src/ui.cpp
+    include/ui.hpp
     resources.qrc
 )
 
@@ -27,7 +29,9 @@ qt_add_qml_module(ClickerX
         src/components/NumberField.qml
 )
 
-target_link_libraries(ClickerX PRIVATE Qt6::Gui Qt6::Qml Qt6::Quick)
+set_target_properties(ClickerX PROPERTIES QT_QMLCACHEGEN_DIRECT_CALL ON)
+
+target_link_libraries(ClickerX PRIVATE Qt6::Core Qt6::Gui Qt6::QmlPrivate Qt6::QuickPrivate Qt6::QuickControls2Private Qt6::QuickTemplates2Private)
 target_include_directories(ClickerX PRIVATE include)
 # set_target_properties(ClickerX PROPERTIES
 #     WIN32_EXECUTABLE ON
