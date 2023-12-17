@@ -16,6 +16,7 @@ qt_add_executable(ClickerX
     src/ui.cpp
     include/ui.hpp
     resources.qrc
+    project.rc
 )
 
 set_source_files_properties(src/main.qml PROPERTIES QT_RESOURCE_ALIAS main.qml)
