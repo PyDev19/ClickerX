@@ -1,13 +1,22 @@
 import QtQuick 6.0
 import QtQuick.Layouts 6.0
 import QtQuick.Controls.Material 6.0
-import "components/"
 
 ApplicationWindow {
     visible: true
-    width: 550
-    height: 275
     title: "ClickerX"
+
+    property int w: 550
+    property int h: 275
+
+    width: w
+    height: h
+
+    maximumWidth: w
+    maximumHeight: h
+
+    minimumWidth: w
+    minimumHeight: h
 
     Material.theme: Material.Dark
     Material.accent: Material.Cyan
