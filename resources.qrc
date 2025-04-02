@@ -4,4 +4,7 @@
         <file alias="icon_16x16.png">icons/icon_16x16.png</file>
         <file alias="icon_32x32.png">icons/icon_32x32.png</file>
     </qresource>
+    <qresource prefix="/qml">
+        <file alias="Main.qml">ui/Main.qml</file>
+    </qresource>
 </RCC>
