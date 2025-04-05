@@ -3,8 +3,12 @@
         <file alias="icon.ico">icons/icon.ico</file>
         <file alias="icon_16x16.png">icons/icon_16x16.png</file>
         <file alias="icon_32x32.png">icons/icon_32x32.png</file>
+        <file alias="close.png">icons/close.png</file>
+        <file alias="minimize.png">icons/minimize.png</file>
+        <file alias="settings.png">icons/settings.png</file>
     </qresource>
     <qresource prefix="/qml">
         <file alias="Main.qml">ui/Main.qml</file>
+        <file alias="components/TitleBarButton.qml">ui/components/TitleBarButton.qml</file>
     </qresource>
 </RCC>
