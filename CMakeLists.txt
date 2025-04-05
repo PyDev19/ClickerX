@@ -31,6 +31,8 @@ qt_add_executable(ClickerX
     src/main.cpp
     src/keylistener.cpp
     include/keylistener.h
+    src/cursorhandler.cpp
+    include/cursorhandler.h
     resources.qrc
 )
 
